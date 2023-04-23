@@ -5,8 +5,27 @@ import { GamesComponent } from './components/games/games.component';
 import { GameComponent } from './components/game/game.component';
 import { LoginComponent } from './components/login/login.component';
 import { MainPageComponent } from './main-page.component';
+import {RouterModule, Routes} from "@angular/router";
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
-
+const routes: Routes = [
+  {
+    path: '', component: MainPageComponent, children: [
+      {
+        path: '', component: GamesComponent
+      },
+      {
+        path: 'history', component: GamesComponent
+      },
+      {
+        path: 'login', component: LoginComponent
+      },
+      {
+        path: 'error', component: NotFoundComponent
+      }
+    ],
+  },
+]
 
 @NgModule({
   declarations: [
@@ -14,10 +33,15 @@ import { MainPageComponent } from './main-page.component';
     GamesComponent,
     GameComponent,
     LoginComponent,
-    MainPageComponent
+    MainPageComponent,
+    NotFoundComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule.forChild(routes)
+  ],
+  exports: [
+    RouterModule
   ]
 })
 export class MainPageModule { }

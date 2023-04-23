@@ -1,7 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+    path: '', loadChildren: () => import('./pages/main-page/main-page.module').then(m => m.MainPageModule)
+  },
+  {
+    path: 'game/:id', loadChildren: () => import('./pages/game-page/game-page.module').then(m => m.GamePageModule)
+  },
+  {
+    path: '**', redirectTo: '/error'
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
