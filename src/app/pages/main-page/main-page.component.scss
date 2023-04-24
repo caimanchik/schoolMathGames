@@ -1,0 +1,19 @@
+.mainpage {
+  min-width: 100vw;
+  min-height: 100vh;
+
+  &__grid {
+  }
+
+  &__sidebar {
+    position: fixed;
+    width: 14rem;
+    height: 100%;
+    left: 0;
+    top: 0;
+  }
+
+  &__content {
+    padding-left: 14rem;
+  }
+}
