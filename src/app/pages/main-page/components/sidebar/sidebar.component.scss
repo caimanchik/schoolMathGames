@@ -50,7 +50,6 @@
     align-items: center;
     justify-content: center;
 
-    transition: all ease .3s;
     position: relative;
     overflow: hidden;
 
@@ -68,7 +67,8 @@
       height: 0;
       z-index: 0;
       transform: translate(-50%, -50%);
-      background-color: darken(#429A85, 5%);
+      background-color: darken(#429A85, 0%);
+
       transition: all ease .6s;
       border-radius: 50%;
     }
@@ -77,6 +77,7 @@
       &:after {
         width: 300px;
         height: 200px;
+        background-color: darken(#429A85, 7%);
       }
     }
   }
@@ -88,11 +89,15 @@
         background-color: #646464;
 
         &:after {
-          background-color: darken(#646464, 10%);
+          background-color: darken(#646464, 0%);
+          transition: all ease .4s;
         }
-        //&:hover, &:focus {
-        //  background-color: darken(#646464, 10%);
-        //}
+
+        &:hover {
+          &:after {
+            background-color: darken(#646464, 7%);
+          }
+        }
       }
     }
   }
