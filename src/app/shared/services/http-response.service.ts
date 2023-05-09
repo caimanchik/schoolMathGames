@@ -1,13 +1,12 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpResponseService{
-
-  private _url: string = '';
 
   constructor(
     private _httpClient: HttpClient,
@@ -20,7 +19,7 @@ export class HttpResponseService{
     params: HttpParams = new HttpParams(),
     headers: HttpHeaders = new HttpHeaders()
   ): Observable<TGet> {
-    return this._httpClient.get<TGet>(this._url + uri, {
+    return this._httpClient.get<TGet>(environment.url + uri, {
       params,
       headers,
     })
@@ -32,7 +31,19 @@ export class HttpResponseService{
     params: HttpParams,
     headers: HttpHeaders
   ): Observable<TPost> {
-    return this._httpClient.post<TPost>(this._url + uri, data, {
+    return this._httpClient.post<TPost>(environment.url + uri, data, {
+      params,
+      headers
+    })
+  }
+
+  public Put<TPut>(
+    uri: string,
+    data: TPut,
+    params: HttpParams,
+    headers: HttpHeaders
+  ): Observable<TPut> {
+    return this._httpClient.put<TPut>(environment.url + uri, data, {
       params,
       headers
     })
