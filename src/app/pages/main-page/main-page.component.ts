@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {OGameStatus} from "../../shared/types/GameStatus";
 
 @Component({
   selector: 'app-main-page',
@@ -10,6 +11,11 @@ export class MainPageComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    // let a: GameMainPage = {
+    //   name: 'dfas',
+    //   gameType: 0
+    // }
+    console.log(Object.values(OGameStatus))
   }
 
 }
