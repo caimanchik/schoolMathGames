@@ -1,1 +1,31 @@
-<p>games works!</p>
+<section class="games">
+
+    <div class="games__wrapper">
+
+        <h1 class="games__title title-page" @appear>
+            {{ isHistory ? 'История' : 'Текущие' }}
+        </h1>
+
+        <ng-container *ngIf="games">
+            <ul class="games__list" @appear>
+
+                <li class="games__game" *ngFor="let game of games">
+                    <app-game [game]="game"></app-game>
+                </li>
+
+            </ul>
+        </ng-container>
+
+        <ng-container *ngIf="!games">
+            <ul class="games__list" @appear>
+
+                <li class="games__game games__game_placehold" *ngFor="let item of [].constructor(10)">
+                    <div class="games__game_placehold__item"></div>
+                </li>
+
+            </ul>
+        </ng-container>
+
+    </div>
+
+</section>

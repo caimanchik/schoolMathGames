@@ -4,7 +4,7 @@
   background-color: #000;
 
   &__wrapper {
-    padding: 4rem 1rem 2rem;
+    padding: 6.8rem 1rem 2rem;
     height: 100%;
   }
 
@@ -12,6 +12,7 @@
     display: flex;
     flex-direction: column;
     height: 100%;
+    position: relative;
   }
 
   &__title {
@@ -19,6 +20,9 @@
     font-size: 1.6rem;
     color: #6B6B6B;
     font-weight: 700;
+    position: absolute;
+    left: 0;
+    top: -1.5rem;
   }
 
   &__nav {
@@ -74,7 +78,7 @@
       border-radius: 50%;
     }
 
-    &:hover, &:focus {
+    &:hover {
       &:after {
         width: 300px;
         height: 200px;

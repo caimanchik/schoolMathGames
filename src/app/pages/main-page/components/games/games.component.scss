@@ -1,0 +1,56 @@
+.games {
+  padding: 6.8rem 7rem 3rem;
+  &__wrapper {
+    position: relative;
+    padding-top: 3.6rem;
+  }
+
+  &__title {
+    position: absolute;
+    left: 0;
+    top: -4rem;
+  }
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -1.6rem;
+  }
+
+  &__game {
+    flex: 0 0 50%;
+    padding: 1.6rem;
+
+    &_placehold__item {
+      width: 100%;
+      padding-top: 55%;
+      background-color: darken(#F5F5F5, 3%);
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+
+      &:after {
+        content: '';
+        position: absolute;
+        width: 140%;
+        left: 30%;
+        top: 0;
+        transform: rotate(45deg)
+      ;
+        box-shadow: 0 0 60px 50px #e1e1e1;
+        animation: loading infinite 1.5s linear;
+      }
+    }
+  }
+}
+
+
+
+@keyframes loading {
+  0% {
+    left: -140%;
+  }
+  100% {
+    left: 55%;
+  }
+}

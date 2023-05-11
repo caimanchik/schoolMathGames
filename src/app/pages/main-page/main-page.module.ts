@@ -7,6 +7,7 @@ import { LoginComponent } from './components/login/login.component';
 import { MainPageComponent } from './main-page.component';
 import {RouterModule, Routes} from "@angular/router";
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import {StatusDirective} from "../../shared/directives/status.directive";
 
 const routes: Routes = [
   {
@@ -34,11 +35,12 @@ const routes: Routes = [
     GameComponent,
     LoginComponent,
     MainPageComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    StatusDirective
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
   ],
   exports: [
     RouterModule

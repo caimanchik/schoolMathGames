@@ -1,1 +1,38 @@
-<p>game works!</p>
+<div class="game">
+
+        <div class="game__content">
+
+            <h3 class="game__title">
+                {{game.name}}
+
+            </h3>
+
+            <div class="game__type">
+                {{ OGameType[game.gameType] }}
+            </div>
+
+            <div class="game__start game__flex">
+                <span>Начало: </span>
+                <span>{{ game.start | date:'dd.MM.yyyy HH:mm' }}</span>
+            </div>
+
+            <div class="game__status game__flex">
+                <span>Статус: </span>
+                <span [statusColor]="game.status">{{ OGameStatus[game.status] }}</span>
+            </div>
+
+            <ul class="game__links game-links">
+                <li class="game-links_item">
+                    <a [routerLink]="'game/' + game.id" class="game-links__link">
+                        Онлайн-табло
+                    </a>
+                </li>
+                <li class="game-links_item">
+                    <a [routerLink]="'game/' + game.id" class="game-links__link">
+                        Редактировать
+                    </a>
+                </li>
+            </ul>
+    </div>
+
+</div>

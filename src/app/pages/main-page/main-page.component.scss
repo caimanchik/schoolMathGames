@@ -7,13 +7,15 @@
 
   &__sidebar {
     position: fixed;
-    width: 14rem;
+    width: 13rem;
     height: 100%;
     left: 0;
     top: 0;
   }
 
   &__content {
-    padding-left: 14rem;
+    padding-left: 13rem;
+    background-color: #fff;
+    min-height: 100vh;
   }
 }

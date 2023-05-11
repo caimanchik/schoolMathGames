@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {GameMainPage} from "../../../../shared/types/GameMainPage";
+import {OGameType} from "../../../../shared/types/GameType";
+import {OGameStatus} from "../../../../shared/types/GameStatus";
 
 @Component({
   selector: 'app-game',
@@ -7,9 +10,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GameComponent implements OnInit {
 
+  @Input() game!: GameMainPage
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  protected readonly OGameType = OGameType;
+  protected readonly OGameStatus = OGameStatus;
 }
