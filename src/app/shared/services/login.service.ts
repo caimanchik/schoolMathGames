@@ -18,8 +18,20 @@ export class LoginService{
     let params = new HttpParams().append('login', login).append('password', password)
     return this._http.Get<{accessToken: string}>('login', params)
       .pipe(
-        tap(() => {
+        tap((token) => {
           this.isLogged$.next(true)
+          localStorage.setItem('token', token.accessToken)
+        })
+      )
+  }
+  
+  public checkAuthorization(): Observable<{ validToken: boolean }> {
+    let params = new HttpParams().append('accessToken', localStorage.getItem('token') ?? '')
+    return this._http.Get<{ validToken: boolean }>('isValidToken', params)
+      .pipe(
+        tap(token => {
+          if (token.validToken)
+            this.isLogged$.next(true)
         })
       )
   }

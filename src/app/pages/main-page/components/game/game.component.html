@@ -27,11 +27,13 @@
                         Онлайн-табло
                     </a>
                 </li>
-                <li class="game-links_item">
-                    <a [routerLink]="'../game/' + game.id" class="game-links__link">
-                        Редактировать
-                    </a>
-                </li>
+                <ng-container *ngIf="login.isLogged$ | async">
+                    <li class="game-links_item">
+                        <a [routerLink]="'../game/' + game.id" class="game-links__link">
+                            Редактировать
+                        </a>
+                    </li>
+                </ng-container>
             </ul>
     </div>
 

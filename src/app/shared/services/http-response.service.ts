@@ -24,6 +24,7 @@ export class HttpResponseService{
     return this._httpClient.get<TGet>(environment.url + uri, {
       params,
       headers,
+      observe: 'body'
     })
       .pipe(
         catchError(e => this.handleError.bind(this)(e))

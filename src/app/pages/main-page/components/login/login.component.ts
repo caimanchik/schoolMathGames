@@ -5,6 +5,7 @@ import {LoginService} from "../../../../shared/services/login.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {LoginForm} from "../../../../shared/types/LoginForm";
 import {DestroyService} from "../../../../shared/services/destroy.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -24,7 +25,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private _login: LoginService,
-    private _destroy: DestroyService
+    private _destroy: DestroyService,
+    private _router: Router
   ) {
     this.loginForm = new FormGroup<LoginForm>({
       login: new FormControl<string>('', {
@@ -39,8 +41,6 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this._login.login('admin', '123456')
-    //   .subscribe(e => console.log(e.accessToken))
   }
 
   login() {
@@ -52,8 +52,8 @@ export class LoginComponent implements OnInit {
       this.loginForm.controls.password.value
     )
       .pipe(this._destroy.TakeUntilDestroy)
-      .subscribe(v => {
-        console.log(v.accessToken)
+      .subscribe(() => {
+        this._router.navigate([''])
       })
   }
 }
