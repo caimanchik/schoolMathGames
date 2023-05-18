@@ -1,0 +1,120 @@
+.login {
+  padding: 6rem 3rem;
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__title {
+  }
+
+  &__form {
+    max-width: 600px;
+    min-width: 300px;
+    width: 50%;
+    margin: 15rem auto 0;
+  }
+}
+
+.title-page {
+}
+
+.login-form {
+  &__field {
+    position: relative;
+
+    &:nth-child(2) {
+      margin-top: 2.5rem;
+    }
+  }
+
+  &__label {
+    font-size: 3rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-left: .8rem;
+  }
+
+  &__input {
+    display: block;
+    margin-top: 1.2rem;
+    background-color: #f0f0f0;
+    width: 100%;
+    padding: 1.3rem 1rem;
+    border-radius: 11px;
+    font-size: 1.3rem;
+    color: black;
+    font-weight: 600;
+    transition: all ease .2s;
+
+    &::placeholder {
+      color: #575757;
+      font-weight: 400;
+    }
+
+    &:focus {
+      box-shadow: 0 0 1px 1px #494949;
+    }
+  }
+
+  &__visible {
+    position: absolute;
+    right: 12px;
+    bottom: 2rem;
+    cursor: pointer;
+
+    & img {
+      position: absolute;
+      left: 0;
+      top: 0;
+      transform: translate(-100%, -50%);
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      z-index: 3;
+      opacity: 0;
+
+      left: 50%;
+      top: 50%;
+
+      background-color: #888888;
+      width: 26px;
+      height: 2px;
+      transform: translate(-100%, -50%) rotate(-45deg);
+      transition: all ease .2s;
+    }
+
+    &.isVisiblePass {
+      &:after {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__submit-wrap {
+    display: flex;
+    align-items: center;
+    margin-top: 5.5rem;
+  }
+
+  &__submit {
+    margin: 0 auto;
+    padding: 1.5rem 5.5rem;
+    background-color: #000;
+    color: white;
+    border-radius: 20px;
+    font-size: 1.8rem;
+    font-weight: 700;
+    transition: all ease .3s;
+    border: 1px solid black;
+
+    &:hover {
+      background-color: #fff;
+      color: black;
+    }
+  }
+}

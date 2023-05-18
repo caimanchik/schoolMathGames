@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {transition, trigger, useAnimation} from "@angular/animations";
 import {appear} from "../../../../shared/animations/appear";
+import {LoginService} from "../../../../shared/services/login.service";
 
 @Component({
   selector: 'app-sidebar',
@@ -14,7 +15,9 @@ import {appear} from "../../../../shared/animations/appear";
 })
 export class SidebarComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    protected login: LoginService
+  ) { }
 
   ngOnInit(): void {
   }

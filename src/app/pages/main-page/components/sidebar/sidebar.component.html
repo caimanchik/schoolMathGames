@@ -22,10 +22,18 @@
                     <li class="sidebar-nav__space">
                     </li>
                     <li class="sidebar-nav__item sidebar-nav__item_edit">
-                        <a href="#" routerLink="login" class="sidebar-nav__link">
-                            <span>РЕЖИМ</span>
-                            <span>РЕДАКТОРА</span>
-                        </a>
+                        <ng-container *ngIf="login.isLogged$ | async; else loginTemplate">
+                            <a href="#" routerLink="'../create-game'" class="sidebar-nav__link">
+                                <span>СОЗДАТЬ</span>
+                                <span>ИГРУ</span>
+                            </a>
+                        </ng-container>
+                        <ng-template #loginTemplate>
+                            <a href="#" routerLink="login" class="sidebar-nav__link">
+                                <span>РЕЖИМ</span>
+                                <span>РЕДАКТОРА</span>
+                            </a>
+                        </ng-template>
                     </li>
                 </ul>
             </nav>

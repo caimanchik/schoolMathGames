@@ -5,9 +5,9 @@ import {Observable, Subject, takeUntil} from "rxjs";
 export class DestroyService implements OnDestroy {
   private readonly _destroy$: Subject<void> = new Subject<void>()
 
-  public TakeUntilDestroy<T>(origin: Observable<T>): Observable<T> {
-    return origin.pipe(takeUntil(this._destroy$))
-  }
+  public readonly TakeUntilDestroy = <T>(
+    origin: Observable<T>
+  ): Observable<T> => origin.pipe(takeUntil(this._destroy$))
 
   ngOnDestroy(): void {
     this._destroy$.next()

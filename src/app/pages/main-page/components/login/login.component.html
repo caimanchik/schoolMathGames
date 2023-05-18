@@ -1,1 +1,38 @@
-<p>login works!</p>
+<section class="login" @appear>
+
+    <div class="login__wrapper">
+
+        <h1 class="login__title title-page">
+            Войти в систему
+        </h1>
+
+        <form action="" class="login__form login-form" [formGroup]="loginForm" (ngSubmit)="login()">
+
+            <div class="login-form__field">
+                <label for="login" class="login-form__label">
+                    Логин
+                </label>
+                <input [formControl]="loginForm.controls.login" id="login" type="text" class="login-form__input" placeholder="Введите логин">
+            </div>
+
+            <div class="login-form__field">
+                <label for="password" class="login-form__label">
+                    Пароль
+                </label>
+                <input [formControl]="loginForm.controls.password" id="password" [type]="isVisiblePass ? 'text' : 'password'" class="login-form__input" placeholder="Введите пароль">
+                <div class="login-form__visible" (click)="isVisiblePass = !isVisiblePass" [ngClass]="{isVisiblePass}">
+                    <img src="assets/icons/visible.svg" alt="">
+                </div>
+            </div>
+
+            <div class="login-form__submit-wrap">
+                <button type="submit" class="login-form__submit">
+                    Войти
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+
+</section>

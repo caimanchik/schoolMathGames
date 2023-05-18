@@ -28,8 +28,8 @@ export class GamesComponent implements OnInit {
 
   ngOnInit(): void {
     this.isHistory = this._router.url.endsWith('history')
-    this._gamesService.getGames1(this.isHistory)
-      .pipe(delay(2000))
+    this._gamesService.getGames(this.isHistory)
+      // .pipe(delay(2000))
       .subscribe((games: GameMainPage[]) => {
         this.games = games
     })

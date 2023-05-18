@@ -5,6 +5,6 @@ export type GameMainPage = {
   id: number,
   name: string,
   gameType: keyof typeof OGameType,
-  start: Date,
+  start: string | Date,
   status: keyof typeof OGameStatus
 }

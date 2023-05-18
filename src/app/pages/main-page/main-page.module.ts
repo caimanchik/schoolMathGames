@@ -8,6 +8,7 @@ import { MainPageComponent } from './main-page.component';
 import {RouterModule, Routes} from "@angular/router";
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import {StatusDirective} from "../../shared/directives/status.directive";
+import {ReactiveFormsModule} from "@angular/forms";
 
 const routes: Routes = [
   {
@@ -41,6 +42,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
+    ReactiveFormsModule,
   ],
   exports: [
     RouterModule

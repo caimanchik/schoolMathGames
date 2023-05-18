@@ -4,7 +4,7 @@ import {OGameStatus} from "../types/GameStatus";
 @Directive({
   selector: '[statusColor]'
 })
-export class StatusDirective implements OnInit{
+export class StatusDirective implements OnInit {
 
   @Input() statusColor!: keyof typeof OGameStatus
 

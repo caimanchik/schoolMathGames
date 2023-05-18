@@ -9,6 +9,9 @@ const routes: Routes = [
     path: 'game/:id', loadChildren: () => import('./pages/game-page/game-page.module').then(m => m.GamePageModule)
   },
   {
+    path: 'create-game', loadChildren: () => import('./pages/create-page/create-page.module').then(m => m.CreatePageModule)
+  },
+  {
     path: '**', redirectTo: '/error'
   }
 ];

@@ -11,12 +11,13 @@ import {OGameStatus} from "../../../../shared/types/GameStatus";
 export class GameComponent implements OnInit {
 
   @Input() game!: GameMainPage
+  protected readonly OGameType = OGameType;
+  protected readonly OGameStatus = OGameStatus;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  protected readonly OGameType = OGameType;
-  protected readonly OGameStatus = OGameStatus;
+
 }
