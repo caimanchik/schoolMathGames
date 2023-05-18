@@ -12,14 +12,27 @@
                 <label for="login" class="login-form__label">
                     Логин
                 </label>
-                <input [formControl]="loginForm.controls.login" id="login" type="text" class="login-form__input" placeholder="Введите логин">
+                <input
+                        [formControl]="loginForm.controls.login"
+                        id="login" type="text"
+                        class="login-form__input"
+                        placeholder="Введите логин"
+                        [ngClass]="{invalid: this.loginForm.controls.login.invalid && this.loginForm.controls.login.touched}"
+                >
             </div>
 
             <div class="login-form__field">
                 <label for="password" class="login-form__label">
                     Пароль
                 </label>
-                <input [formControl]="loginForm.controls.password" id="password" [type]="isVisiblePass ? 'text' : 'password'" class="login-form__input" placeholder="Введите пароль">
+                <input
+                        [formControl]="loginForm.controls.password"
+                        id="password"
+                        [type]="isVisiblePass ? 'text' : 'password'"
+                        class="login-form__input"
+                        placeholder="Введите пароль"
+                        [ngClass]="{invalid: this.loginForm.controls.password.invalid && this.loginForm.controls.password.touched}"
+                >
                 <div class="login-form__visible" (click)="isVisiblePass = !isVisiblePass" [ngClass]="{isVisiblePass}">
                     <img src="assets/icons/visible.svg" alt="">
                 </div>

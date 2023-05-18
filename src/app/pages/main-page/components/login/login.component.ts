@@ -44,6 +44,9 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    if (!this.loginForm.valid)
+      return
+
     this._login.login(
       this.loginForm.controls.login.value,
       this.loginForm.controls.password.value

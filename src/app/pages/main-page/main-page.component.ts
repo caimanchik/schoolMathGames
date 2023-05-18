@@ -11,11 +11,6 @@ export class MainPageComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    // let a: GameMainPage = {
-    //   name: 'dfas',
-    //   gameType: 0
-    // }
-    console.log(Object.values(OGameStatus))
   }
 
 }

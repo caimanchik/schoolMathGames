@@ -57,6 +57,10 @@
     &:focus {
       box-shadow: 0 0 1px 1px #494949;
     }
+
+    &.invalid {
+      box-shadow: 0 0 1px 1px red;
+    }
   }
 
   &__visible {
