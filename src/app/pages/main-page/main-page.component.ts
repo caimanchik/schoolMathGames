@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {OGameStatus} from "../../shared/types/GameStatus";
+import {LoginService} from "../../shared/services/login.service";
 
 @Component({
   selector: 'app-main-page',
@@ -8,7 +8,9 @@ import {OGameStatus} from "../../shared/types/GameStatus";
 })
 export class MainPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    protected loginService: LoginService
+  ) { }
 
   ngOnInit(): void {
   }

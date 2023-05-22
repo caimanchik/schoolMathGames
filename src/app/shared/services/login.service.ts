@@ -35,4 +35,9 @@ export class LoginService{
         })
       )
   }
+
+  public logOut(): void {
+    localStorage.removeItem('token')
+    this.isLogged$.next(false)
+  }
 }

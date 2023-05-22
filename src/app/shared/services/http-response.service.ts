@@ -55,7 +55,7 @@ export class HttpResponseService{
     })
   }
 
-  private handleError(error: HttpErrorResponse,): Observable<never> {
+  private handleError(error: HttpErrorResponse): Observable<never> {
     if (error.status === 401)
       this._error.createError(error.error.error)
     else

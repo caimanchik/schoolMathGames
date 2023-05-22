@@ -19,3 +19,26 @@
     min-height: 100vh;
   }
 }
+
+.logout {
+  position: fixed;
+  right: 0;
+  top: 0;
+  transform: translate(-50%, 50%);
+  border-radius: 15px;
+  overflow: hidden;
+  border: 1px solid black;
+
+  &__button {
+    padding: 1rem 2rem;
+    background-color: #000;
+    color: #fff;
+    font-size: 1.3rem;
+    transition: all ease .3s;
+
+    &:hover {
+      background-color: #fff;
+      color: black;
+    }
+  }
+}
