@@ -1,0 +1,181 @@
+.create {
+  padding: 5rem 2rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+
+  &__wrapper {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__title {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    flex-grow: 1;
+    margin-top: 5.5rem;
+    align-items: center;
+  }
+
+  &__create {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3rem;
+  }
+
+  &__create-button {
+    padding: 1.3rem 2.8rem;
+    color: white;
+    background-color: #429A85;
+    transition: all ease .3s;
+    border-radius: 20px;
+    font-size: 2rem;
+    font-weight: 700;
+
+    &:hover {
+      background-color: #254e44;
+    }
+  }
+}
+
+
+.create-form {
+  &__grow {
+    flex-grow: 1;
+  }
+  &__name {
+    max-width: 1100px;
+    width: 100%;
+  }
+
+  &__name-input {
+    width: 100%;
+    text-align: center;
+    background-color: #f0f0f0;
+    color: black;
+    font-size: 2.5rem;
+    padding: 1rem;
+    border-radius: 11px;
+    transition: all ease .3s;
+    box-shadow: 0 0 1px 1px white;
+
+    &::placeholder {
+      color: #9D9D9D;
+    }
+
+    &:focus, &:active {
+      box-shadow: 0 0 1px 1px black;
+    }
+
+    &.invalid {
+      box-shadow: 0 0 1px 1px red;
+    }
+  }
+
+  &__game-picker {
+    margin-top: 4rem;
+  }
+
+  &__date {
+    margin-top: 4rem;
+  }
+
+  &__date-row {
+    display: flex;
+    gap: 1rem;
+    margin-top: .7rem;
+  }
+
+  &__field-title {
+    text-align: center;
+    font-weight: 700;
+    font-size: 2.3rem;
+  }
+
+  &__date-wrap {
+    position: relative;
+    //font-size: 2rem;
+    padding: 7px 14px;
+    background-color: #f0f0f0;
+    border-radius: 11px;
+    max-width: 170px;
+    width: auto;
+    box-shadow: 0 0 1px 1px white;
+    transition: all ease .3s;
+
+    &.invalid {
+      box-shadow: 0 0 1px 1px red;
+    }
+  }
+
+  &__input-date {
+    &::-webkit-inner-spin-button,
+    &::-webkit-calendar-picker-indicator
+    {
+      position: fixed;
+      left: -100%;
+      top: -100%;
+    }
+
+    font-size: 28px;
+    letter-spacing: -.055em;
+    //line-height: 21px;
+    //color: transparent;
+    line-height: 1;
+    background-color: transparent;
+    width: 200px;
+    font-weight: 700;
+    color: #3D8E4F;
+  }
+
+  &__date-show {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translate(0, -50%);
+    pointer-events: none;
+    display: none;
+  }
+
+  &__time-game {
+    margin-top: 2.3rem;
+    &__input {
+      font-size: 28px;
+      //letter-spacing: -.055em;
+      //line-height: 21px;
+      //color: transparent;
+      line-height: 1;
+      background-color: transparent;
+      //width: 200px;
+      font-weight: 700;
+      color: #3290FF;
+    }
+  }
+
+  &__time {
+    font-size: 28px;
+    //letter-spacing: -.055em;
+    //line-height: 21px;
+    //color: transparent;
+    line-height: 1;
+    background-color: transparent;
+    //width: 200px;
+    font-weight: 700;
+    color: #3290FF;
+  }
+}
+
+.margin {
+  margin: 0 auto;
+  display: flex;
+  //width: 110px;
+}

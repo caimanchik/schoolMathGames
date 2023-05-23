@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpResponseService} from "./http-response.service";
 import {map, Observable} from "rxjs";
-import {GameMainPage} from "../types/GameMainPage";
-import {HttpParams} from "@angular/common/http";
+import {HttpHeaders, HttpParams} from "@angular/common/http";
+import {CreateGame, GameAllInfo, GameMainPage} from "../types/Game";
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +12,13 @@ export class GamesService {
   constructor(
     private _http: HttpResponseService
   ) {
+
   }
 
   public getGames(history: boolean = false): Observable<GameMainPage[]> {
     let params: HttpParams = new HttpParams().append('history', history)
 
-    return this._http.Get<GameMainPage[]>('games/', params)
+    return this._http.Get<GameMainPage[]>('api/v1/games/', params)
       .pipe(
         map(r =>
           r.map(game => ({
@@ -27,6 +28,11 @@ export class GamesService {
             .sort((a, b) => +b.start - +a.start)
         )
       )
+  }
+
+  public createGame(game: CreateGame): Observable<GameAllInfo> {
+    let headers = new HttpHeaders().append('Authorization', `Token ${localStorage.getItem('token') ?? ''}`)
+    return this._http.Post<CreateGame, GameAllInfo>('', game, new HttpParams(), headers)
   }
 
   // public getGames1(history: boolean = false): Observable<GameMainPage[]> {

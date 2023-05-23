@@ -1,1 +1,70 @@
-<p>create-page works!</p>
+
+
+<section class="create" @appear>
+    <app-back-to-main></app-back-to-main>
+
+    <div class="create__wrapper">
+
+        <h1 class="create__title title-page">
+            Создать игру
+        </h1>
+
+        <form action="" class="create__form create-form" [formGroup]="createForm">
+
+            <div class="create-form__name">
+                <input
+                        type="text"
+                        class="create-form__name-input"
+                        placeholder="Введите название игры"
+                        formControlName="gameTitle"
+                        [ngClass]="{invalid: createForm.controls['gameTitle'].invalid && (createForm.controls['gameTitle'].touched)}"
+                >
+            </div>
+
+            <div class="create-form__game-picker">
+                <app-game-control formControlName="game" ></app-game-control>
+            </div>
+
+            <div class="create-form__date">
+                <div class="create-form__field-title">
+                    Дата
+                </div>
+                <div class="create-form__date-row">
+                    <div class="create-form__date-wrap" [ngClass]="{invalid: createForm.controls['date'].invalid && createForm.controls['date'].touched}">
+                        <input type="date" class="create-form__input-date" formControlName="date" onClick="event.preventDefault()">
+                        <div class="create-form__date-show">
+                            {{ currentDate | date:'dd.MM.YYYY' }}
+                        </div>
+                    </div>
+
+                    <div class="create-form__date-wrap">
+                        <input type="time" class="create-form__time" formControlName="time">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="create-form__time-game">
+                <div class="create-form__field-title">
+                    Время игры(часы/минуты)
+                </div>
+                <div class="create-form__date-row">
+                    <div class="create-form__date-wrap margin">
+                        <input type="time" class="create-form__time-game__input" formControlName="timeGame">
+                    </div>
+                </div>
+            </div>
+
+            <div class="create-form__grow"></div>
+
+            <div class="create__create">
+                <button class="create__create-button" (click)="createGame()">
+                    Создать
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+
+</section>

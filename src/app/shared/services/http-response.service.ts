@@ -31,16 +31,19 @@ export class HttpResponseService{
       )
   }
 
-  public Post<TPost>(
+  public Post<TPost, TGet>(
     uri: string,
     data: TPost,
-    params: HttpParams,
-    headers: HttpHeaders
-  ): Observable<TPost> {
-    return this._httpClient.post<TPost>(environment.url + uri, data, {
+    params: HttpParams = new HttpParams(),
+    headers: HttpHeaders = new HttpHeaders()
+  ): Observable<TGet> {
+    return this._httpClient.post<TGet>(environment.url + uri, data, {
       params,
       headers
     })
+      .pipe(
+        catchError(e => this.handleError.bind(this)(e))
+      )
   }
 
   public Put<TPut>(
@@ -56,10 +59,13 @@ export class HttpResponseService{
   }
 
   private handleError(error: HttpErrorResponse): Observable<never> {
-    if (error.status === 401)
-      this._error.createError(error.error.error)
-    else
+    if (error.error.non_field_errors[0] == 'Unable to log in with provided credentials.') {
+      this._error.createError('Неверный логин или пароль')
+      // return throwError(() => new Error('Ошибка запроса'))
+    } else if (error.status !== 401)
       this._error.createError('Неизвестная ошибка')
+    // else
+    //   this._error.createError('Неизвестная ошибка')
 
     return throwError(() => new Error('Ошибка запроса'))
   }

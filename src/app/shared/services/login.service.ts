@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable, tap} from "rxjs";
+import {BehaviorSubject, catchError, from, Observable, of, tap} from "rxjs";
 import {HttpResponseService} from "./http-response.service";
-import {HttpParams} from "@angular/common/http";
+import {HttpHeaders, HttpParams} from "@angular/common/http";
+import {User} from "../types/User";
 
 @Injectable({
   providedIn: 'root'
@@ -14,24 +15,26 @@ export class LoginService{
     private _http: HttpResponseService
   ) { }
 
-  public login(login: string, password: string): Observable<{accessToken: string}> {
-    let params = new HttpParams().append('login', login).append('password', password)
-    return this._http.Get<{accessToken: string}>('login', params)
+  public login(user: User): Observable<{auth_token: string}> {
+    return this._http.Post<User, {auth_token: string}>('auth/token/login', user)
       .pipe(
         tap((token) => {
           this.isLogged$.next(true)
-          localStorage.setItem('token', token.accessToken)
+          localStorage.setItem('token', token.auth_token)
         })
       )
   }
   
   public checkAuthorization(): Observable<{ validToken: boolean }> {
-    let params = new HttpParams().append('accessToken', localStorage.getItem('token') ?? '')
-    return this._http.Get<{ validToken: boolean }>('isValidToken', params)
+    let headers = new HttpHeaders().append('Authorization', `Token ${localStorage.getItem('token') ?? ''}`)
+    return this._http.Get<{ validToken: boolean }>('api/v1/isValidToken', new HttpParams(), headers)
       .pipe(
         tap(token => {
           if (token.validToken)
             this.isLogged$.next(true)
+        }),
+        catchError(() => {
+          return of({validToken: false})
         })
       )
   }

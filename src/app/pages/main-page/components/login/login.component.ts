@@ -47,10 +47,10 @@ export class LoginComponent implements OnInit {
     if (!this.loginForm.valid)
       return
 
-    this._login.login(
-      this.loginForm.controls.login.value,
-      this.loginForm.controls.password.value
-    )
+    this._login.login({
+      username: this.loginForm.controls.login.value,
+      password: this.loginForm.controls.password.value
+    })
       .pipe(this._destroy.TakeUntilDestroy)
       .subscribe(() => {
         this._router.navigate([''])

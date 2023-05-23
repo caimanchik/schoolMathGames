@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
-import {GameMainPage} from "../../../../shared/types/GameMainPage";
 import {GamesService} from "../../../../shared/services/games.service";
 import {delay} from "rxjs";
 import {transition, trigger, useAnimation} from "@angular/animations";
 import {appear} from "../../../../shared/animations/appear";
+import {GameMainPage} from "../../../../shared/types/Game";
 
 @Component({
   selector: 'app-games',

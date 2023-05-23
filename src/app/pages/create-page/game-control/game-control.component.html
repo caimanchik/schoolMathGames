@@ -1,0 +1,21 @@
+<div class="game__row">
+
+    <div class="game__game">
+        <button class="game__button" (click)="switchCheck(2)" [ngClass]="{active: checked === 2}">
+            Домино
+        </button>
+    </div>
+
+    <div class="game__game">
+        <button class="game__button" (click)="switchCheck(0)" [ngClass]="{active: checked === 0}">
+            Математическая Абака
+        </button>
+    </div>
+
+    <div class="game__game">
+        <button class="game__button" (click)="switchCheck(1)" [ngClass]="{active: checked === 1}">
+            Бонусы
+        </button>
+    </div>
+
+</div>
