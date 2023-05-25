@@ -29,7 +29,7 @@
                 </li>
                 <ng-container *ngIf="login.isLogged$ | async">
                     <li class="game-links_item">
-                        <a [routerLink]="'../game/' + game.id" class="game-links__link">
+                        <a [routerLink]="'../edit/' + game.id" class="game-links__link">
                             Редактировать
                         </a>
                     </li>

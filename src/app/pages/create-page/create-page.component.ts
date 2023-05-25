@@ -4,6 +4,8 @@ import {DestroyService} from "../../shared/services/destroy.service";
 import {transition, trigger, useAnimation} from "@angular/animations";
 import {appear} from "../../shared/animations/appear";
 import {CreateGame} from "../../shared/types/Game";
+import {GamesService} from "../../shared/services/games.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-create-page',
@@ -25,10 +27,12 @@ export class CreatePageComponent implements OnInit {
 
   constructor(
     private _fb: FormBuilder,
-    private _destroy: DestroyService
+    private _destroy: DestroyService,
+    private _gamesService: GamesService,
+    private _router: Router
   ) {
     let nowDate = new Date(Date.now())
-    this.currentDate = `${nowDate.getFullYear()}-${(nowDate.getMonth() < 9 ? '0' : '') + (nowDate.getMonth() + 1)}-${(nowDate.getDate() < 10 ? '0' : '') + nowDate.getDate()}`
+    this.currentDate = `${nowDate.getFullYear()}-${(nowDate.getMonth() < 9 ? '0' : '')}${(nowDate.getMonth() + 1)}-${(nowDate.getDate() < 10 ? '0' : '')}${nowDate.getDate()}`
 
     this.createForm = this._fb.group({
       gameTitle: new FormControl<string>('', {
@@ -53,7 +57,7 @@ export class CreatePageComponent implements OnInit {
           }
         ]
       }),
-      time: new FormControl(`${nowDate.getHours()}:${nowDate.getMinutes()}`,
+      time: new FormControl(`${nowDate.getHours() < 10 ? '0' : ''}${nowDate.getHours()}:${nowDate.getMinutes() < 10 ? '0' : ''}${nowDate.getMinutes()}`,
         {
         validators: Validators.required
       }),
@@ -63,7 +67,7 @@ export class CreatePageComponent implements OnInit {
     })
 
     this.createForm.controls['date'].valueChanges
-      .pipe(this._destroy.TakeUntilDestroy)
+      .pipe(this._destroy.takeUntilDestroy)
       .subscribe((e: string) => this.currentDate = e)
   }
 
@@ -77,13 +81,27 @@ export class CreatePageComponent implements OnInit {
       return
     }
 
-    let a: CreateGame = {
+    let game: CreateGame = {
       name: this.createForm.controls['gameTitle'].value,
-      gameType: this.createForm.controls['game'].value,
+      gameType: this.codeTime(this.createForm.controls['timeGame'].value),
       start: Date.parse(this.createForm.controls['date'].value + 'T' + this.createForm.controls['time'].value),
       timeGame: this.createForm.controls['timeGame'].value,
     }
 
-    console.log(a)
+    this._gamesService.createGame(game)
+      .pipe(this._destroy.takeUntilDestroy)
+      .subscribe(createdGame => {
+        this._router.navigate(['edit', createdGame.id], {
+          state: createdGame
+        })
+      })
+  }
+
+  private codeTime(input: string): number {
+    let split = input.split(':')
+    let hours = parseInt(split[0])
+    let minutes = parseInt(split[1])
+
+    return hours * 3600 + minutes * 60
   }
 }

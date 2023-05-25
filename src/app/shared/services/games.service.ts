@@ -18,7 +18,7 @@ export class GamesService {
   public getGames(history: boolean = false): Observable<GameMainPage[]> {
     let params: HttpParams = new HttpParams().append('history', history)
 
-    return this._http.Get<GameMainPage[]>('api/v1/games/', params)
+    return this._http.Get<GameMainPage[]>('api/v1/gameList/', params)
       .pipe(
         map(r =>
           r.map(game => ({
@@ -32,7 +32,12 @@ export class GamesService {
 
   public createGame(game: CreateGame): Observable<GameAllInfo> {
     let headers = new HttpHeaders().append('Authorization', `Token ${localStorage.getItem('token') ?? ''}`)
-    return this._http.Post<CreateGame, GameAllInfo>('', game, new HttpParams(), headers)
+    return this._http.Post<CreateGame, GameAllInfo>('api/v1/createGame', game, new HttpParams(), headers)
+  }
+
+  public getGameById(id: number): Observable<GameAllInfo> {
+    const params = new HttpParams().set('id', id)
+    return this._http.Get<GameAllInfo>('api/v1/game', params)
   }
 
   // public getGames1(history: boolean = false): Observable<GameMainPage[]> {

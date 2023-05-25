@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, catchError, from, Observable, of, tap} from "rxjs";
+import {BehaviorSubject, catchError, Observable, of, tap, throwError} from "rxjs";
 import {HttpResponseService} from "./http-response.service";
 import {HttpHeaders, HttpParams} from "@angular/common/http";
 import {User} from "../types/User";
+import {ErrorService} from "./error.service";
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ export class LoginService{
   public isLogged$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
 
   constructor(
-    private _http: HttpResponseService
+    private _http: HttpResponseService,
+    private _error: ErrorService
   ) { }
 
   public login(user: User): Observable<{auth_token: string}> {
@@ -21,6 +23,10 @@ export class LoginService{
         tap((token) => {
           this.isLogged$.next(true)
           localStorage.setItem('token', token.auth_token)
+        }),
+        catchError(e => {
+          this._error.createError('Неверный логин или пароль')
+          return throwError(e)
         })
       )
   }

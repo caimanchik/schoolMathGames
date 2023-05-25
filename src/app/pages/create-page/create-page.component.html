@@ -1,5 +1,3 @@
-
-
 <section class="create" @appear>
     <app-back-to-main></app-back-to-main>
 
@@ -22,7 +20,7 @@
             </div>
 
             <div class="create-form__game-picker">
-                <app-game-control formControlName="game" ></app-game-control>
+                <app-game-control formControlName="game"></app-game-control>
             </div>
 
             <div class="create-form__date">
@@ -37,20 +35,19 @@
                         </div>
                     </div>
 
-                    <div class="create-form__date-wrap">
+                    <div class="create-form__date-wrap time">
                         <input type="time" class="create-form__time" formControlName="time">
                     </div>
                 </div>
-
             </div>
 
             <div class="create-form__time-game">
                 <div class="create-form__field-title">
                     Время игры(часы/минуты)
                 </div>
-                <div class="create-form__date-row">
-                    <div class="create-form__date-wrap margin">
-                        <input type="time" class="create-form__time-game__input" formControlName="timeGame">
+                <div class="create-form__date-row center">
+                    <div class="create-form__date-wrap time">
+                        <input type="time" class="create-form__time" formControlName="timeGame">
                     </div>
                 </div>
             </div>

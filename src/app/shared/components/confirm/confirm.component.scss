@@ -1,0 +1,53 @@
+.confirm {
+  position: fixed;
+  background: rgba(217, 217, 217, 0.7);
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  top: 0;
+
+  &__bg {
+    position: fixed;
+    background-color: #fff;
+    //padding-top: 30rem;
+    padding: 6rem 10rem 4rem;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 11px;
+  }
+
+  &__message {
+    font-weight: 700;
+    font-size: 2.5rem;
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 5rem;
+  }
+
+  &__button {
+    background-color: #68A153;
+    font-weight: 700;
+    font-size: 1.8rem;
+    padding: 1rem 1.5rem;
+    border-radius: 20px;
+    color: white;
+    transition: all ease .3s;
+
+    &:hover {
+      background-color: darken(#68A153, 7%);
+    }
+
+    &-cancel {
+      background-color: #DA0303;
+
+      &:hover {
+        background-color: darken(#DA0303, 6%);
+      }
+    }
+  }
+}

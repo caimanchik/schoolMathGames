@@ -1,0 +1,28 @@
+<section class="edit" @appear>
+
+    <app-back-to-main></app-back-to-main>
+
+    <div class="edit__wrapper">
+
+        <h1 class="edit__title title-page">
+            Редактирование
+        </h1>
+
+        <ng-container *ngIf="game; else loading">
+
+            <app-before-started
+                    [game]="game"
+                    class="edit__before"
+                    (startEvent)="startGame()"
+                    @appear @leave
+            ></app-before-started>
+
+        </ng-container>
+        <ng-template #loading>
+            <div class="loader" @appear>
+                <img src="assets/icons/loader-black.svg">
+            </div>
+        </ng-template>
+    </div>
+
+</section>

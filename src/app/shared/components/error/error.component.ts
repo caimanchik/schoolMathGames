@@ -21,7 +21,7 @@ export class ErrorComponent implements OnInit {
 
   ngOnInit(): void {
     this._error.error$
-      .pipe(this._destroy.TakeUntilDestroy)
+      .pipe(this._destroy.takeUntilDestroy)
       .subscribe(error => {
         this.error = error
         this.visible = true

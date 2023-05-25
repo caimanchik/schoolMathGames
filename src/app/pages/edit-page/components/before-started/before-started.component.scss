@@ -1,0 +1,302 @@
+.edit {
+
+  &__title {
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 6rem;
+    align-items: center;
+    width: 100%;
+  }
+
+  &__teams {
+    margin-top: 3.6rem;
+  }
+
+  &__grow {
+    flex-grow: 1;
+  }
+
+  &__buttons {
+    margin-top: 3rem;
+  }
+}
+
+.edit-form {
+  &__name {
+    width: 100%;
+    max-width: 1300px;
+  }
+
+  &__name-input {
+    width: 100%;
+    text-align: center;
+    background-color: #f0f0f0;
+    color: black;
+    font-size: 2.5rem;
+    padding: 1rem;
+    border-radius: 11px;
+    transition: all ease .3s;
+    box-shadow: 0 0 1px 1px transparent;
+
+    &::placeholder {
+      color: #9D9D9D;
+    }
+
+    &:focus, &:active {
+      box-shadow: 0 0 1px 1px black;
+    }
+
+    &.invalid {
+      box-shadow: 0 0 1px 1px red;
+    }
+
+  }
+
+  &__row {
+    display: flex;
+    margin-top: 2rem;
+    gap: 4rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__field {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  &__field-title {
+    font-weight: 700;
+    font-size: 2.3rem;
+  }
+
+  &__date-row {
+    display: flex;
+    gap: 1rem;
+  }
+
+  &__input-wrap {
+    position: relative;
+    padding: 7px 12px;
+    background-color: #f0f0f0;
+    border-radius: 11px;
+    width: 193px;
+    box-shadow: 0 0 1px 1px white;
+    transition: all ease .3s;
+    overflow: hidden;
+
+    &.time {
+      width: 114px;
+    }
+
+    &.invalid {
+      box-shadow: 0 0 1px 1px red;
+    }
+  }
+
+  &__input-date {
+    &::-webkit-inner-spin-button,
+    &::-webkit-calendar-picker-indicator
+    {
+      position: fixed;
+      left: -100%;
+      top: -100%;
+      padding-left: 1000px;
+      width: 0;
+      height: 0;
+      opacity: 0;
+      display: none;
+    }
+    font-family: 'Roboto Mono', monospace;
+    font-size: 26px;
+    line-height: 1;
+    vertical-align: top;
+    background-color: transparent;
+    width: 300px;
+    font-weight: 700;
+    position: relative;
+    top: 50%;
+    right: 0%;
+    transform: translate(0, -50%);
+    color: #3D8E4F;
+  }
+
+  &__input-time {
+    font-size: 28px;
+    font-family: 'Roboto Mono', monospace;
+    line-height: 1;
+    background-color: transparent;
+    width: 300px;
+    font-weight: 700;
+    color: #3290FF;
+  }
+}
+
+.edit-teams {
+  width: 100%;
+  max-width: 1300px;
+  &__title {
+    font-weight: 700;
+    font-size: 2.3rem;
+    text-align: center;
+  }
+
+  &__controls {
+    width: 100%;
+    margin-top: 2.5rem;
+  }
+
+  &__control {
+    width: 100%;
+    margin-bottom: 1.3rem;
+    display: flex;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__input-wrap {
+    flex: 0 0 55rem;
+  }
+
+  &__input {
+    width: 100%;
+    background-color: #f0f0f0;
+    color: black;
+    font-size: 2rem;
+    padding: 1rem 1.5rem;
+    border-radius: 11px;
+    transition: all ease .3s;
+    box-shadow: 0 0 1px 1px transparent;
+
+    &::placeholder {
+      color: #9D9D9D;
+    }
+
+    &:focus, &:active {
+      box-shadow: 0 0 1px 1px black;
+    }
+
+    &.invalid {
+      box-shadow: 0 0 1px 1px red;
+    }
+  }
+
+  &__buttons {
+    //flex: 0 0 40rem;
+    margin-left: 1.8rem;
+    display: flex;
+  }
+
+  &__button {
+    margin-left: 1rem;
+    position: relative;
+    height: 100%;
+    border-radius: 11px;
+    transition: all ease .3s;
+
+    & img {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 2rem;
+      height: 2rem;
+      object-fit: contain;
+      pointer-events: none;
+      transition: all ease .3s;
+    }
+
+    & img {
+      &:last-child {
+        opacity: 0;
+      }
+    }
+
+    &.loading {
+      & img {
+        &:first-child {
+          opacity: 0;
+        }
+        &:last-child {
+          opacity: 1;
+        }
+      }
+
+      & ~ .edit-teams__button {
+        //opacity: 0;
+        //pointer-events: none;
+        display: none;
+      }
+    }
+  }
+
+  &__delete {
+    aspect-ratio: 1;
+    background-color: #DA0303;
+    margin-left: 0;
+
+    &:hover {
+      background-color: darken(#DA0303, 4%);
+    }
+  }
+
+  &__ok {
+    aspect-ratio: 1;
+    background-color: #68A153;
+
+    &-add {
+      margin-left: 0;
+    }
+
+    &:hover {
+      background-color: darken(#68A153, 7%);
+    }
+  }
+
+  &__cancel {
+    background-color: #3290FF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1.5rem 0 1.5rem;
+    font-size: 2rem;
+    color: white;
+
+    &:hover {
+      background-color: darken(#3290FF, 10%);
+    }
+  }
+}
+
+.edit-buttons {
+  display: flex;
+  gap: 1rem;
+
+  &__button {
+    padding: 1rem 1.5rem;
+    border-radius: 11px;
+    background-color: #68A153;
+    color: #fff;
+    font-size: 1.5rem;
+    transition: all ease .3s;
+
+    &:hover {
+      background-color: darken(#68A153, 7%);
+    }
+
+    &-delete {
+      background-color: #DA0303;
+
+      &:hover {
+        background-color: darken(#DA0303, 4%);
+      }
+    }
+  }
+}

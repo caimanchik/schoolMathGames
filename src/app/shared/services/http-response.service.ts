@@ -59,14 +59,17 @@ export class HttpResponseService{
   }
 
   private handleError(error: HttpErrorResponse): Observable<never> {
-    if (error.error.non_field_errors[0] == 'Unable to log in with provided credentials.') {
-      this._error.createError('Неверный логин или пароль')
-      // return throwError(() => new Error('Ошибка запроса'))
-    } else if (error.status !== 401)
-      this._error.createError('Неизвестная ошибка')
+    // if (error.error.non_field_errors !== undefined && error.error.non_field_errors[0] == 'Unable to log in with provided credentials.') {
+    //   this._error.createError('Неверный логин или пароль')
+    //   // return throwError(() => new Error('Ошибка запроса'))
+    // } else if (error.status !== 401) {
+    //   this._error.createError('Неизвестная ошибка')
+    // }
     // else
     //   this._error.createError('Неизвестная ошибка')
+    if (error.status !== 401)
+      this._error.createError('Неизвестная ошибка')
 
-    return throwError(() => new Error('Ошибка запроса'))
+    return throwError(() => error)
   }
 }

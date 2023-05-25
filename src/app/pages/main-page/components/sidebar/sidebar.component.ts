@@ -24,11 +24,11 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit(): void {
     this.login.isLogged$
-      .pipe(this._destroy.TakeUntilDestroy)
+      .pipe(this._destroy.takeUntilDestroy)
       .subscribe(v => {
         if (!v)
           this.login.checkAuthorization()
-            .pipe(this._destroy.TakeUntilDestroy)
+            .pipe(this._destroy.takeUntilDestroy)
             .subscribe()
       })
   }

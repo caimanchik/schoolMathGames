@@ -2,22 +2,12 @@ export type Team = {
   id: number,
   name: string,
   sumScore: number,
-  scores: Scores
+  scores: string[]
 }
 
-export type Scores = {
-  [K in number]: string
-}
-
-let a: Team = {
-  id: 1,
-  name: '',
-  sumScore: 1,
-  scores: {
-    1: '',
-    2: ''
-  }
-}
+// export type Scores = {
+//   [K in number]: string
+// }
 
 export type CreateTeam = {
   name: string,

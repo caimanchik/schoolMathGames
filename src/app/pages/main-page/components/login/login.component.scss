@@ -115,10 +115,36 @@
     font-weight: 700;
     transition: all ease .3s;
     border: 1px solid black;
+    position: relative;
 
     &:hover {
       background-color: #fff;
       color: black;
+    }
+
+    &-text, &-loader {
+      transition: all ease .3s;
+    }
+
+    &.loading {
+      .login-form__submit-text {
+        opacity: 0;
+      }
+
+      .login-form__submit-loader {
+        opacity: 1;
+      }
+    }
+
+    &-loader {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      transition: all ease .3s;
+      opacity: 0;
+      width: 2rem;
+      height: 2rem;
     }
   }
 }

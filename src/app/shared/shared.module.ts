@@ -4,6 +4,7 @@ import {BackToMainComponent} from "./components/back-to-main/back-to-main.compon
 import {ErrorComponent} from "./components/error/error.component";
 import {StatusDirective} from "./directives/status.directive";
 import {RouterLink} from "@angular/router";
+import { ConfirmComponent } from './components/confirm/confirm.component';
 
 
 
@@ -11,7 +12,8 @@ import {RouterLink} from "@angular/router";
   declarations: [
     BackToMainComponent,
     ErrorComponent,
-    StatusDirective
+    StatusDirective,
+    ConfirmComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +22,8 @@ import {RouterLink} from "@angular/router";
   exports: [
     BackToMainComponent,
     ErrorComponent,
-    StatusDirective
+    StatusDirective,
+    ConfirmComponent
   ]
 })
 export class SharedModule { }

@@ -1,0 +1,131 @@
+
+<form action="" class="edit__form edit-form" [formGroup]="gameForm" @appear>
+    <div class="edit-form__name">
+        <input
+                type="text"
+                class="edit-form__name-input"
+                placeholder="Введите название игры"
+                [formControl]="gameForm.controls.gameTitle"
+                [ngClass]="{invalid: gameForm.controls['gameTitle'].invalid && (gameForm.controls['gameTitle'].touched)}"
+        >
+    </div>
+
+    <div class="edit-form__row">
+        <div class="edit-form__field">
+            <div class="edit-form__field-title">
+                Дата
+            </div>
+            <div class="edit-form__date-row">
+                <div class="edit-form__input-wrap" [ngClass]="{invalid: gameForm.controls['date'].invalid && gameForm.controls['date'].touched}">
+                    <input
+                            type="date"
+                            class="edit-form__input-date"
+                            [formControl]="gameForm.controls.date"
+                            onClick="event.preventDefault()"
+                    >
+                </div>
+
+                <div class="edit-form__input-wrap time">
+                    <input
+                            type="time"
+                            class="edit-form__input-time"
+                            [formControl]="gameForm.controls.time"
+                    >
+                </div>
+            </div>
+
+        </div>
+
+        <div class="edit-form__field">
+            <div class="edit-form__field-title">
+                Время игры
+            </div>
+            <div class="edit-form__date-row">
+
+                <div class="edit-form__input-wrap time">
+                    <input
+                            type="time"
+                            class="edit-form__input-time"
+                            [formControl]="gameForm.controls.timeGame"
+                            onClick="event.preventDefault()"
+                    >
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>
+
+<div class="edit__teams edit-teams">
+    <h2 class="edit-teams__title">
+        Команды
+    </h2>
+    <ul class="edit-teams__controls">
+        <ng-container *ngFor="let teamControl of teamsControls.controls; let i = index">
+            <li class="edit-teams__control" @appear @leave>
+                <div class="edit-teams__input-wrap">
+                    <input
+                            type="text"
+                            [formControl]="teamControl.controls.name"
+                            class="edit-teams__input"
+                    >
+                </div>
+                <div class="edit-teams__buttons">
+                    <ng-container *ngIf="i != teamsControls.controls.length - 1; else addButton">
+                        <button
+                                class="edit-teams__button edit-teams__delete"
+                                (click)="removeTeam(i, $event)"
+                                @appear
+                        >
+                            <img src="assets/icons/delete.png" alt="">
+                            <img src="assets/icons/loader-button.svg">
+                        </button>
+                        <ng-container *ngIf="teamControl.controls.name.value != teams[i].name">
+                            <button
+                                    class="edit-teams__button edit-teams__ok"
+                                    (click)="updateTeam(i, $event)"
+                                    @appear @leave
+                            >
+                                <img src="assets/icons/ok.png">
+                                <img src="assets/icons/loader-button.svg">
+                            </button>
+                            <button
+                                    class="edit-teams__button edit-teams__cancel"
+                                    (click)="cancelUpdate(i)"
+                                    @appear @leave
+                            >
+                                Отмена
+                            </button>
+                        </ng-container>
+                    </ng-container>
+
+                    <ng-template #addButton>
+                        <ng-container *ngIf="teamControl.controls.name.value != ''">
+                            <button
+                                    class="edit-teams__button edit-teams__ok edit-teams__ok-add"
+                                    (click)="addTeam($event)"
+                                    @appear
+                            >
+                                <img src="assets/icons/ok.png">
+                                <img src="assets/icons/loader-button.svg">
+                            </button>
+                        </ng-container>
+                    </ng-template>
+
+                </div>
+            </li>
+        </ng-container>
+    </ul>
+</div>
+
+<div class="edit__grow"></div>
+
+<div class="edit__buttons edit-buttons">
+    <button class="edit-buttons__button edit-buttons__button-delete">
+        Удалить игру
+    </button>
+
+    <button class="edit-buttons__button" (click)="startGame()">
+        Начать игру
+    </button>
+</div>
