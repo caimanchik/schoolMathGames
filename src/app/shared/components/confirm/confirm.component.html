@@ -2,22 +2,22 @@
     <div class="confirm" @appear @leave>
     </div>
 
-        <div class="confirm__bg">
+    <div class="confirm__bg" @appear @leave>
 
-            <div class="confirm__message">
-                {{ message }}
-            </div>
-
-            <div class="confirm__buttons">
-                <button class="confirm__button" (click)="confirm(true)">
-                    Да
-                </button>
-                <button class="confirm__button confirm__button-cancel" (click)="confirm(false)">
-                    Нет
-                </button>
-            </div>
-
+        <div class="confirm__message">
+            {{ message }}
         </div>
+
+        <div class="confirm__buttons">
+            <button class="confirm__button" (click)="confirm(true)">
+                Да
+            </button>
+            <button class="confirm__button confirm__button-cancel" (click)="confirm(false)">
+                Нет
+            </button>
+        </div>
+
+    </div>
 
 
 </ng-container>
