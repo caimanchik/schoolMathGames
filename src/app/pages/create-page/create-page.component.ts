@@ -83,10 +83,12 @@ export class CreatePageComponent implements OnInit {
 
     let game: CreateGame = {
       name: this.createForm.controls['gameTitle'].value,
-      gameType: this.codeTime(this.createForm.controls['timeGame'].value),
+      gameType: this.createForm.controls['game'].value,
       start: Date.parse(this.createForm.controls['date'].value + 'T' + this.createForm.controls['time'].value),
-      timeGame: this.createForm.controls['timeGame'].value,
+      timeGame: this.codeTime(this.createForm.controls['timeGame'].value),
     }
+
+    console.log(game)
 
     this._gamesService.createGame(game)
       .pipe(this._destroy.takeUntilDestroy)
