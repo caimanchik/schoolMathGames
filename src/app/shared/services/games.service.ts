@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import {HttpResponseService} from "./http-response.service";
 import {map, Observable} from "rxjs";
 import {HttpHeaders, HttpParams} from "@angular/common/http";
-import {CreateGame, GameAllInfo, GameMainPage} from "../types/Game";
+import {CreateGame, DeleteGame, GameAllInfo, GameMainPage, UpdateGame, UpdateGameStatus} from "../types/Game";
+import {CreateTeam, DeleteTeam, Team, UpdateTeam} from "../types/Team";
 
 @Injectable({
   providedIn: 'root'
@@ -32,69 +33,49 @@ export class GamesService {
 
   public createGame(game: CreateGame): Observable<GameAllInfo> {
     let headers = new HttpHeaders().append('Authorization', `Token ${localStorage.getItem('token') ?? ''}`)
+
     return this._http.Post<CreateGame, GameAllInfo>('api/v1/createGame', game, new HttpParams(), headers)
+  }
+
+  public deleteGame(game: DeleteGame): Observable<any> {
+    let headers = new HttpHeaders().append('Authorization', `Token ${localStorage.getItem('token') ?? ''}`)
+
+    return this._http.Post<DeleteGame, any>('api/v1/deleteGame', game, new HttpParams(), headers)
   }
 
   public getGameById(id: number): Observable<GameAllInfo> {
     const params = new HttpParams().set('id', id)
+
     return this._http.Get<GameAllInfo>('api/v1/game', params)
   }
 
-  // public getGames1(history: boolean = false): Observable<GameMainPage[]> {
-  //
-  //   return of([
-  //     {
-  //       id: 32,
-  //       name: 'Первый тур чемпионата лицея №130 по Математическим Абакам',
-  //       gameType: 0,
-  //       start: new Date(),
-  //       status: 4
-  //     },{
-  //       id: 32,
-  //       name: 'Первый тур чемпионата лицея №130 по Математическим Абакам',
-  //       gameType: 1,
-  //       start: new Date(),
-  //       status: 1
-  //     },{
-  //       id: 32,
-  //       name: 'Первый тур чемпионата лицея №130 по Математическим Абакам',
-  //       gameType: 2,
-  //       start: new Date(),
-  //       status: 2
-  //     },{
-  //       id: 32,
-  //       name: 'Первый тур чемпионата лицея №130 по Математическим Абакам',
-  //       gameType: 1,
-  //       start: new Date(),
-  //       status: 3
-  //     },
-  //     {
-  //       id: 32,
-  //       name: 'Первый тур чемпионата лицея №130 по Математическим Абакам',
-  //       gameType: 0,
-  //       start: new Date(),
-  //       status: 4
-  //     },{
-  //       id: 32,
-  //       name: 'Первый тур чемпионата лицея №130 по Математическим Абакам',
-  //       gameType: 1,
-  //       start: new Date(),
-  //       status: 1
-  //     },{
-  //       id: 32,
-  //       name: 'Первый тур чемпионата лицея №130 по Математическим Абакам',
-  //       gameType: 2,
-  //       start: new Date(),
-  //       status: 2
-  //     },{
-  //       id: 32,
-  //       name: 'Первый тур чемпионата лицея №130 по Математическим Абакам',
-  //       gameType: 1,
-  //       start: new Date(),
-  //       status: 3
-  //     },
-  //   ])
-  // }
+  public addTeam(team: CreateTeam): Observable<Team> {
+    let headers = new HttpHeaders().append('Authorization', `Token ${localStorage.getItem('token') ?? ''}`)
 
-  // public createGame(): Observable<>
+    return this._http.Post<CreateTeam, Team>('api/v1/addTeam', team, new HttpParams(), headers)
+  }
+
+  public deleteTeam(team: DeleteTeam): Observable<Team> {
+    let headers = new HttpHeaders().append('Authorization', `Token ${localStorage.getItem('token') ?? ''}`)
+
+    return this._http.Post<DeleteTeam, Team>('api/v1/deleteTeam', team, new HttpParams(), headers)
+  }
+
+  public updateTeam(team: UpdateTeam): Observable<Team> {
+    let headers = new HttpHeaders().append('Authorization', `Token ${localStorage.getItem('token') ?? ''}`)
+
+    return this._http.Post<UpdateTeam, Team>('api/v1/updateTeam', team, new HttpParams(), headers)
+  }
+
+  public updateGame(game: UpdateGame): Observable<any> {
+    let headers = new HttpHeaders().append('Authorization', `Token ${localStorage.getItem('token') ?? ''}`)
+
+    return this._http.Post<UpdateGame, any>('api/v1/updateGameInfo', game, new HttpParams(), headers)
+  }
+
+  public updateGameStatus(game: UpdateGameStatus): Observable<GameAllInfo> {
+    let headers = new HttpHeaders().append('Authorization', `Token ${localStorage.getItem('token') ?? ''}`)
+
+    return this._http.Post<UpdateGameStatus, GameAllInfo>('api/v1/updateGameStatus', game, new HttpParams(), headers)
+  }
 }

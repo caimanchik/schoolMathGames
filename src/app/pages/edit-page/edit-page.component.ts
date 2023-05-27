@@ -9,6 +9,8 @@ import {
   FormBuilder,
 } from "@angular/forms";
 import {leave} from "../../shared/animations/leave";
+import {take} from "rxjs";
+import {OGameStatus} from "../../shared/types/GameStatus";
 
 @Component({
   selector: 'app-edit-page',
@@ -38,7 +40,7 @@ export class EditPageComponent implements OnInit {
   ) {
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     let game = this._router.getCurrentNavigation()?.extras.state
 
     if (!!game) {
@@ -56,8 +58,19 @@ export class EditPageComponent implements OnInit {
       })
   }
 
-  startGame() {
-    // window.location.reload()
+  protected changeGameStatus(status: keyof typeof OGameStatus) {
+    let id = this.game?.id ?? 0
+    this.game = null
+
+    this._gamesService.updateGameStatus({gameId: id, status: status})
+      .pipe(take(1))
+      .subscribe(game => {
+        this.game = game
+        console.log(this.game)
+      })
+  }
+
+  protected deleteGame() {
     this.game = null
   }
 }

@@ -5,6 +5,7 @@ import {RouterModule, Routes} from "@angular/router";
 import {SharedModule} from "../../shared/shared.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { BeforeStartedComponent } from './components/before-started/before-started.component';
+import { AfterStartedComponent } from './components/after-started/after-started.component';
 
 
 const routes: Routes = [
@@ -17,7 +18,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     EditPageComponent,
-    BeforeStartedComponent
+    BeforeStartedComponent,
+    AfterStartedComponent
   ],
   imports: [
     CommonModule,

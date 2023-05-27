@@ -135,6 +135,44 @@
     font-weight: 700;
     color: #3290FF;
   }
+
+  &__button {
+    padding: 1rem 1.5rem;
+    color: white;
+    font-size: 1.8rem;
+
+    background-color: #3D8E4F;
+    border-radius: 11px;
+
+    transition: all ease .3s;
+
+    &:hover {
+      background-color: darken(#68A153, 20%);
+    }
+    
+    &-cancel {
+      background-color: #3290FF;
+
+      &:hover {
+        background-color: darken(#3290FF, 15%);
+      }
+    }
+  }
+
+  &__buttons {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1.5rem;
+
+    &.disabled {
+
+      .edit-form__button {
+        background-color: #d7d7d7;
+        color: #000;
+      }
+
+    }
+  }
 }
 
 .edit-teams {

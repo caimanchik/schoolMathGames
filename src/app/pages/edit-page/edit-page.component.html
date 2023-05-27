@@ -8,10 +8,21 @@
 
             <app-before-started
                     [game]="game"
+                    *ngIf="game.status == 0"
                     class="edit__before"
-                    (startEvent)="startGame()"
+                    (changeStatusEvent)="changeGameStatus($event)"
+                    (deleteEvent)="deleteGame()"
                     @appear @leave
             ></app-before-started>
+
+            <app-after-started
+                    [game]="game"
+                    class="edit__after"
+                    (changeStatusEvent)="changeGameStatus($event)"
+                    *ngIf="game.status != 0"
+                    @appear @leave
+            ></app-after-started>
+
 
         </ng-container>
         <ng-template #loading>

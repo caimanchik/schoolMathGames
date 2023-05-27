@@ -1,0 +1,49 @@
+<section class="after">
+
+    <div class="after__wrapper">
+
+        <h2 class="after__name">
+            {{ game.name }}
+        </h2>
+
+        <div class="after__row">
+
+            <div class="after__rest after-rest">
+
+                <div class="after-rest__container">
+                    01:30
+                </div>
+
+            </div>
+
+            <div class="after__buttons">
+
+                <button class="after__button" @appear @leave>
+                    Сохранить
+                </button>
+
+                <ng-container *ngIf="game.status == 1" @appear @leave>
+                    <button class="after__button">
+                        Сохранить
+                    </button>
+                    <button class="after__button">
+                        Заморозить
+                    </button>
+                </ng-container>
+
+                <ng-container *ngIf="game.status == 2" @appear @leave>
+                    <button class="after__button">
+                        Сохранить
+                    </button>
+                    <button class="after__button">
+                        Заморозить
+                    </button>
+                </ng-container>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

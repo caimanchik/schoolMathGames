@@ -22,11 +22,15 @@ export type CreateGame = {
   timeGame: number
 }
 
+export type UpdateGame = Omit<CreateGame, 'gameType'> & {
+  gameId: number,
+}
+
 export type UpdateGameStatus = {
-  id: number,
+  gameId: number,
   status: keyof typeof OGameStatus
 }
 
 export type DeleteGame = {
-  id: number
+  gameId: number
 }

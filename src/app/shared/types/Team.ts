@@ -5,10 +5,6 @@ export type Team = {
   scores: string[]
 }
 
-// export type Scores = {
-//   [K in number]: string
-// }
-
 export type CreateTeam = {
   name: string,
   gameId: number

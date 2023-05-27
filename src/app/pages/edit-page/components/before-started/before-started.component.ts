@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {GameAllInfo} from "../../../../shared/types/Game";
+import {GameAllInfo, UpdateGame} from "../../../../shared/types/Game";
 import {
   AbstractControl,
   FormArray,
@@ -10,7 +10,7 @@ import {
   Validators
 } from "@angular/forms";
 import {GameForm} from "../../../../shared/types/forms/GameForm";
-import {Team} from "../../../../shared/types/Team";
+import {Team, UpdateTeam} from "../../../../shared/types/Team";
 import {Router} from "@angular/router";
 import {GamesService} from "../../../../shared/services/games.service";
 import {DestroyService} from "../../../../shared/services/destroy.service";
@@ -19,6 +19,8 @@ import {appear} from "../../../../shared/animations/appear";
 import {leave} from "../../../../shared/animations/leave";
 import {TeamControl} from "../../../../shared/types/forms/TeamControl";
 import {ConfirmService} from "../../../../shared/services/confirm.service";
+import {take} from "rxjs";
+import {OGameStatus} from "../../../../shared/types/GameStatus";
 
 @Component({
   selector: 'app-before-started',
@@ -39,11 +41,14 @@ import {ConfirmService} from "../../../../shared/services/confirm.service";
 export class BeforeStartedComponent implements OnInit {
 
   @Input('game') game!: GameAllInfo
-  @Output('startEvent') startEvent: EventEmitter<true> = new EventEmitter<true>()
+  @Output('changeStatusEvent') changeStatusEvent: EventEmitter<keyof typeof OGameStatus> = new EventEmitter<keyof typeof OGameStatus>()
+  @Output('deleteEvent') deleteEvent: EventEmitter<true> = new EventEmitter<true>()
 
   protected gameForm!: FormGroup<GameForm>
   protected teamForm!: FormGroup
   protected teams!: Team[]
+  protected disableGameForm = true
+
   private counter = -1
 
   constructor(
@@ -57,6 +62,12 @@ export class BeforeStartedComponent implements OnInit {
 
   ngOnInit(): void {
     this.parseGame(this.game)
+
+    this.gameForm.valueChanges
+      .pipe(this._destroy.takeUntilDestroy)
+      .subscribe(() => {
+        this.disableGameForm = false
+      })
   }
 
   get teamsControls() {
@@ -86,29 +97,30 @@ export class BeforeStartedComponent implements OnInit {
     })
   }
 
-  addTeam(event: any): void {
+  protected addTeam(event: any): void {
     if (event.target.classList.contains('loading'))
       return
 
     event.target.classList.add('loading')
 
-    setTimeout(() => {
-      let control = this.teamsControls.at(this.teamsControls.length - 1)
-      control.controls.id.setValue(this.counter)
-      this.teams.push({
-        name: control.controls.name.value,
-        id: this.counter,
-        sumScore: 1,
-        scores: []
-      })
-      event.target.classList.remove('loading')
-      this.teamsControls.push(this.initTeam())
-    }, 1000)
+    let control = this.teamsControls.at(this.teamsControls.length - 1)
+    control.disable()
 
-    // todo add team with updating id
+    this._gamesService.addTeam({gameId: this.game.id, name: control.controls.name.value})
+      .pipe(take(1))
+      .subscribe(team => {
+        control.controls.id.setValue(team.id)
+        this.teams.push(team)
+
+        event.target.classList.remove('loading')
+        control.controls.id.setValue(this.counter)
+        control.enable()
+
+        this.teamsControls.push(this.initTeam())
+      })
   }
 
-  removeTeam(i: number, event: any) {
+  protected deleteTeam(i: number, event: any) {
     this._confirmer.createConfirm('Удалить команду?')
       .subscribe(result => {
         if (!result)
@@ -119,50 +131,53 @@ export class BeforeStartedComponent implements OnInit {
 
         event.target.classList.add('loading');
 
-        const team = this.teams[i]
+        let control = this.teamsControls.at(i)
+        control.disable()
 
-        this.teamsControls.at(i).disable()
-
-        setTimeout(()=> {
-
-
-          let controls = this.teamsControls
-          for (let j = 0; j < controls.length; j++) {
-            if (controls.at(j).controls.id.value == team.id) {
-              controls.removeAt(j)
-              this.teams.splice(this.teams.findIndex(e => e.id == team.id), 1);
-              break
+        this._gamesService.deleteTeam({gameId: this.game.id, teamId: control.controls.id.value})
+          .pipe(take(1))
+          .subscribe(team => {
+            let controls = this.teamsControls
+            for (let j = 0; j < controls.length; j++) {
+              if (controls.at(j).controls.id.value == team.id) {
+                controls.removeAt(j)
+                this.teams.splice(this.teams.findIndex(e => e.id == team.id), 1);
+                break
+              }
             }
-          }
-        }, 0)
+          })
       })
-    //todo delete team
   }
 
-  updateTeam(i: number, event: any): void {
+  protected updateTeam(i: number, event: any): void {
     if (event.target.classList.contains('loading'))
       return
 
     event.target.classList.add('loading')
-    this.teamsControls.at(i).disable()
+
+    let control = this.teamsControls.at(i)
+    control.disable()
 
     //todo check disable
 
-    let team = this.teams[i]
+    let team: UpdateTeam = {
+      gameId: this.game.id,
+      teamId: control.controls.id.value,
+      name: control.controls.name.value
+    }
 
-    setTimeout(() => {
-      let controls = this.teamsControls
+    this._gamesService.updateTeam(team)
+      .pipe(take(1))
+      .subscribe(team => {
+        let teamFront = this.teams.find(e => e.id == team.id)
 
-      for (let j = 0; j < controls.length; j++) {
-        if (controls.at(j).controls.id.value == team.id) {
-          team.name = controls.at(j).controls.name.value
-          this.teamsControls.at(i).enable()
-          break
-        }
-      }
-    }, 500)
+        if (!teamFront)
+          return
 
-    //todo update team
+        teamFront.name = team.name
+
+        control.enable()
+      })
   }
 
   cancelUpdate(i: number): void {
@@ -226,13 +241,79 @@ export class BeforeStartedComponent implements OnInit {
     return `${input.getHours() < 10 ? '0' : ''}${input.getHours()}:${input.getMinutes() < 10 ? '0' : ''}${input.getMinutes()}`
   }
 
-  startGame() {
+  protected startGame() {
     this._confirmer.createConfirm('Начать игру?')
       .subscribe(result => {
         if (!result)
           return
 
-        this.startEvent.emit(true)
+        this.changeStatusEvent.emit(1)
       })
+  }
+
+  protected deleteGame() {
+    this._confirmer.createConfirm('Удалить игру?')
+      .subscribe(result => {
+        if (!result)
+          return
+
+        this.deleteEvent.emit(true)
+
+        this._gamesService.deleteGame({gameId: this.game.id})
+          .pipe(take(1))
+          .subscribe(() => this._router.navigate(['']))
+      })
+  }
+
+  protected updateGame() {
+    if (this.gameForm.invalid || this.gameForm.disabled) {
+      this.gameForm.markAsTouched()
+      return
+    }
+
+    this.gameForm.disable()
+
+    let game: UpdateGame = {
+      gameId: this.game.id,
+      name: this.gameForm.controls.gameTitle.value,
+      timeGame: this.codeTime(this.gameForm.controls.timeGame.value),
+      start: Date.parse(this.gameForm.controls.date.value + 'T' + this.gameForm.controls.time.value)
+    }
+
+    setTimeout(() => this.disableGameForm = true, 10)
+
+    this._gamesService.updateGame(game)
+      .subscribe(() => {
+        this.game.name = game.name
+        this.game.timeGame = game.timeGame
+        this.game.start = new Date(game.start)
+        this.gameForm.enable()
+        setTimeout(() => this.disableGameForm = true, 10)
+      })
+  }
+
+  private codeTime(input: string): number {
+    let split = input.split(':')
+    let hours = parseInt(split[0])
+    let minutes = parseInt(split[1])
+
+    return hours * 3600 + minutes * 60
+  }
+
+  protected resetGame() {
+    if (this.gameForm.disabled)
+      return
+
+    let date = new Date(this.game.start)
+    this.gameForm.controls.gameTitle.setValue(this.game.name)
+    this.gameForm.controls.date.setValue(this.parseDate(date))
+    this.gameForm.controls.time.setValue(this.parseTime(date))
+    this.gameForm.controls.timeGame.setValue(this.parseTimeGame(this.game.timeGame))
+
+    this.gameForm.enable()
+
+    setTimeout(() => {
+      this.disableGameForm = true
+    }, 10)
   }
 }

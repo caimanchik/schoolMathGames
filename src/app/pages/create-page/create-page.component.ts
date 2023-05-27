@@ -88,8 +88,6 @@ export class CreatePageComponent implements OnInit {
       timeGame: this.codeTime(this.createForm.controls['timeGame'].value),
     }
 
-    console.log(game)
-
     this._gamesService.createGame(game)
       .pipe(this._destroy.takeUntilDestroy)
       .subscribe(createdGame => {
