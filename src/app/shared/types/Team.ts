@@ -1,5 +1,5 @@
 export type Team = {
-  id: number,
+  teamId: number,
   name: string,
   sumScore: number,
   scores: string[]

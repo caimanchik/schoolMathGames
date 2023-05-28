@@ -1,49 +1,115 @@
-<section class="after">
+<div class="after__wrapper">
 
-    <div class="after__wrapper">
+    <h2 class="after__name">
+        {{ game.name }}
+        <div class="after__type">
+            / {{ OGameType[game.gameType] }}
+        </div>
+    </h2>
 
-        <h2 class="after__name">
-            {{ game.name }}
-        </h2>
+    <div class="after__row">
 
-        <div class="after__row">
+        <div class="after__rest after-rest">
 
-            <div class="after__rest after-rest">
-
-                <div class="after-rest__container">
-                    01:30
-                </div>
-
+            <div class="after-rest__container">
+                01:30:30
             </div>
 
-            <div class="after__buttons">
+        </div>
 
-                <button class="after__button" @appear @leave>
+        <div class="after__buttons">
+
+            <ng-container *ngIf="toChange.length != 0">
+                <button class="after__button after__button-stop" @appear @leave (click)="cancelUpdate()">
+                    Отмена
+                </button>
+                <button class="after__button after__button-save" @appear @leave>
                     Сохранить
                 </button>
+            </ng-container>
 
-                <ng-container *ngIf="game.status == 1" @appear @leave>
-                    <button class="after__button">
-                        Сохранить
-                    </button>
-                    <button class="after__button">
-                        Заморозить
-                    </button>
-                </ng-container>
 
-                <ng-container *ngIf="game.status == 2" @appear @leave>
-                    <button class="after__button">
-                        Сохранить
-                    </button>
-                    <button class="after__button">
-                        Заморозить
-                    </button>
-                </ng-container>
+            <ng-container *ngIf="game.status == 1">
+                <button class="after__button after__button-pause" @appear @leave>
+                    Приостановить
+                </button>
+            </ng-container>
 
-            </div>
+            <ng-container *ngIf="game.status == 2">
+                <button class="after__button after__button-ok" @appear @leave>
+                    Возобновить
+                </button>
+                <button class="after__button after__button-frozen" @appear @leave>
+                    Заморозить
+                </button>
+            </ng-container>
+
+            <ng-container *ngIf="game.status == 3">
+                <button class="after__button after__button-pause" @appear @leave>
+                    Разморозить
+                </button>
+                <button class="after__button after__button-stop" @appear @leave>
+                    Завершить
+                </button>
+            </ng-container>
+
+            <ng-container *ngIf="game.status == 4">
+                <div class="after__button after__button-stop" @appear @leave>
+                    Завершена
+                </div>
+            </ng-container>
 
         </div>
 
     </div>
 
-</section>
+    <div class="after__results-wrap">
+
+        <div class="after__results after-results">
+            <div class="after-results__row">
+                <div class="after-results__team-head" #teamRef>
+                    Команда
+                </div>
+                <div class="after-results__sum-head" #sumRef>
+                    Сумма
+                </div>
+                <ng-container *ngFor="let ex of GameExercises.getExercises(game.gameType)">
+                    <div class="after-results__score-head">
+                        {{ ex }}
+                    </div>
+                </ng-container>
+                <ng-container *ngFor="let ex of GameExercises.getExercises(game.gameType)">
+                    <div class="after-results__score-head">
+                        {{ ex }}
+                    </div>
+                </ng-container>
+            </div>
+
+            <ng-container *ngFor="let team of getTeamsGroups(); let i = index">
+                <ng-container [formGroup]="team">
+                    <div class="after-results__row">
+                        <div class="after-results__team" #teamRef>
+                            {{ game.teams[i].name }}
+                        </div>
+                        <div class="after-results__sum" #sumRef>
+                            {{ game.teams[i].sumScore }}
+                        </div>
+
+                        <ng-container *ngFor="let score of team.controls.scores.controls; let j = index">
+                            <div class="after-results__score">
+                                <input class="after-results__input" type="text" [formControl]="score.controls.score">
+                            </div>
+                        </ng-container>
+
+                        <ng-container *ngFor="let score of team.controls.scores.controls; let j = index">
+                            <div class="after-results__score">
+                                <input class="after-results__input" type="text" [formControl]="score.controls.score">
+                            </div>
+                        </ng-container>
+                    </div>
+                </ng-container>
+            </ng-container>
+        </div>
+    </div>
+
+</div>

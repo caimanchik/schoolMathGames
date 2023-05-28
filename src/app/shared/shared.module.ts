@@ -13,7 +13,7 @@ import { ConfirmComponent } from './components/confirm/confirm.component';
     BackToMainComponent,
     ErrorComponent,
     StatusDirective,
-    ConfirmComponent
+    ConfirmComponent,
   ],
   imports: [
     CommonModule,
@@ -23,7 +23,7 @@ import { ConfirmComponent } from './components/confirm/confirm.component';
     BackToMainComponent,
     ErrorComponent,
     StatusDirective,
-    ConfirmComponent
+    ConfirmComponent,
   ]
 })
 export class SharedModule { }

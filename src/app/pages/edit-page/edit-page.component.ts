@@ -65,8 +65,7 @@ export class EditPageComponent implements OnInit {
     this._gamesService.updateGameStatus({gameId: id, status: status})
       .pipe(take(1))
       .subscribe(game => {
-        this.game = game
-        console.log(this.game)
+        setTimeout(() => this.game = game, 300)
       })
   }
 

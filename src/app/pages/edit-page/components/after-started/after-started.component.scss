@@ -1,0 +1,193 @@
+.after {
+  &__wrapper {
+    padding: 2rem 4.5rem;
+    width: 100%;
+  }
+
+  &__name {
+    font-weight: 700;
+    font-size: 1.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .7rem;
+  }
+
+  &__type {
+    color: #6B6B6B;
+  }
+
+  &__row {
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__rest {
+    margin-left: 15%;
+  }
+
+  &__buttons {
+    display: flex;
+    gap: 1.2rem;
+    justify-content: flex-end;
+  }
+
+  &__button {
+    background-color: #000;
+    color: white;
+    padding: 1.2rem 1.8rem;
+    border-radius: 11px;
+    font-size: 1.8rem;
+    font-weight: 700;
+    transition: all ease .3s;
+
+    &-save {
+      background-color: #454B7E;
+    }
+
+    &-ok {
+      background-color: #68A153;
+    }
+
+    &-pause {
+      background-color: #BE8632;
+    }
+
+    &-frozen {
+      background-color: #536EA1;
+    }
+    
+    &-stop {
+      background-color: #DA0303;
+    }
+  }
+}
+
+.after-rest {
+  padding: .5rem .9rem;
+  background-color: #F0F0F0;
+  border-radius: 11px;
+
+  &__container {
+    color: #3290FF;
+    font-weight: 700;
+    font-size: 2.5rem;
+  }
+}
+
+.after {
+  &__results-wrap {
+    margin-top: 2rem;
+    width: 100%;
+    //overflow-y: ;
+  }
+
+  &__results {
+    width: 100%;
+    overflow-x: scroll;
+
+    padding-bottom: 1rem;
+  }
+}
+
+.after-results {
+  &__row {
+    display: flex;
+    width: fit-content;
+
+    &-head {
+      position: sticky;
+      z-index: 3;
+      top: 0;
+    }
+  }
+
+  &__team-head {
+    //width: 10rem;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: sticky;
+    left: 0;
+    top: 0;
+    background-color: #e5e5e5;
+    z-index: 2;
+  }
+
+  &__sum-head {
+    width: 5rem;
+    height: 3rem;
+    border: 1px solid black;
+    border-left: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: sticky;
+
+    background-color: #e5e5e5;
+    z-index: 2;
+  }
+
+  &__score-head {
+    width: 2.5rem;
+    height: 3rem;
+
+    border: 1px solid black;
+    border-left: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #e5e5e5;
+    position: sticky;
+    top: 0;
+  }
+
+  &__team {
+    //width: 10rem;
+    border: 1px solid black;
+    border-top: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .7rem;
+    position: sticky;
+    left: 0;
+
+    background-color: #e5e5e5;
+  }
+
+  &__sum {
+    width: 5rem;
+    height: 3rem;
+    text-align: center;
+
+    border: 1px solid black;
+    border-top: none;
+    border-left: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: sticky;
+
+    background-color: #fff;
+  }
+
+  &__score {
+    width: 2.5rem;
+    height: 3rem;
+  }
+
+  &__input {
+    width: 2.5rem;
+    height: 3rem;
+
+    border: 1px solid black;
+    border-top: none;
+    border-left: none;
+    text-align: center;
+  }
+}

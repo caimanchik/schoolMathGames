@@ -46,7 +46,7 @@ export class BeforeStartedComponent implements OnInit {
 
   protected gameForm!: FormGroup<GameForm>
   protected teamForm!: FormGroup
-  protected teams!: Team[]
+  protected teams: Team[] = []
   protected disableGameForm = true
 
   private counter = -1
@@ -91,7 +91,7 @@ export class BeforeStartedComponent implements OnInit {
       name: new FormControl<string>(team?.name ?? '', {
         nonNullable: true
       }),
-      id: new FormControl<number>(team?.id ?? --this.counter, {
+      id: new FormControl<number>(team?.teamId ?? --this.counter, {
         nonNullable: true
       })
     })
@@ -109,11 +109,10 @@ export class BeforeStartedComponent implements OnInit {
     this._gamesService.addTeam({gameId: this.game.id, name: control.controls.name.value})
       .pipe(take(1))
       .subscribe(team => {
-        control.controls.id.setValue(team.id)
+        control.controls.id.setValue(team.teamId)
         this.teams.push(team)
 
         event.target.classList.remove('loading')
-        control.controls.id.setValue(this.counter)
         control.enable()
 
         this.teamsControls.push(this.initTeam())
@@ -139,9 +138,9 @@ export class BeforeStartedComponent implements OnInit {
           .subscribe(team => {
             let controls = this.teamsControls
             for (let j = 0; j < controls.length; j++) {
-              if (controls.at(j).controls.id.value == team.id) {
+              if (controls.at(j).controls.id.value == team.teamId) {
                 controls.removeAt(j)
-                this.teams.splice(this.teams.findIndex(e => e.id == team.id), 1);
+                this.teams.splice(this.teams.findIndex(e => e.teamId == team.teamId), 1);
                 break
               }
             }
@@ -169,7 +168,7 @@ export class BeforeStartedComponent implements OnInit {
     this._gamesService.updateTeam(team)
       .pipe(take(1))
       .subscribe(team => {
-        let teamFront = this.teams.find(e => e.id == team.id)
+        let teamFront = this.teams.find(e => e.teamId == team.teamId)
 
         if (!teamFront)
           return
@@ -182,7 +181,7 @@ export class BeforeStartedComponent implements OnInit {
 
   cancelUpdate(i: number): void {
     let control = this.teamsControls.at(i);
-    let team = this.teams.find(e => e.id == control.controls.id.value);
+    let team = this.teams.find(e => e.teamId == control.controls.id.value);
 
     if (team)
       control.controls.name.setValue(team.name)
