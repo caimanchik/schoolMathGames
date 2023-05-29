@@ -22,6 +22,7 @@ import {ScoreGroup, TeamGroup, TeamsScoresGroup} from "../../../../shared/types/
 import {Team} from "../../../../shared/types/Team";
 import {ChangeScoreTeam} from "../../../../shared/types/forms/СhangeScore";
 import {Subject} from "rxjs";
+import {ConfirmService} from "../../../../shared/services/confirm.service";
 
 @Component({
   selector: 'app-after-started',
@@ -43,6 +44,7 @@ export class AfterStartedComponent implements OnInit, AfterViewInit{
 
   @Input('game') public game!: GameAllInfo
   @Output('changeStatusEvent') public changeStatusEvent: EventEmitter<keyof typeof OGameStatus> = new EventEmitter<keyof typeof OGameStatus>()
+  @Output('deleteEvent') deleteEvent: EventEmitter<any> = new EventEmitter<any>()
   protected teamsScoresForm!: FormGroup<TeamsScoresGroup>
   protected toChange: ChangeScoreTeam[] = []
   private cancel: Subject<any> = new Subject<any>()
@@ -56,11 +58,11 @@ export class AfterStartedComponent implements OnInit, AfterViewInit{
   constructor(
     private _fb: FormBuilder,
     private _destroy: DestroyService,
+    private _confirmer: ConfirmService
   ) { }
 
   ngOnInit(): void {
     this.createScoresForm()
-
   }
 
   ngAfterViewInit() {
@@ -68,9 +70,6 @@ export class AfterStartedComponent implements OnInit, AfterViewInit{
     this.teamRef.forEach(e => max = Math.max(max, e.nativeElement.getBoundingClientRect().width))
     this.teamRef.forEach(e => e.nativeElement.style.width = max + 'px')
     this.sumRef.forEach(e => e.nativeElement.style.left = max + 'px')
-    // this.sumRef.forEach(e=>
-    //   e.nativeElement.style.left = this.teamRef.nativeElement.getBoundingClientRect().width + 'px');
-    // console.log(this.teamRef.nativeElement.getBoundingClientRect().width)
   }
 
   protected getTeamsGroups() {
@@ -91,7 +90,7 @@ export class AfterStartedComponent implements OnInit, AfterViewInit{
       scores: this._fb.array<FormGroup<ScoreGroup>>([])
     })
 
-    for (let i = 0; i < GameExercises.getCountExercises(this.game.gameType); i++) {
+    for (let i = 0; i < GameExercises.getCountExercises(this.game.type); i++) {
       teamGroup.controls.scores.push(this.createScoreGroup(team, i));
     }
 
@@ -100,7 +99,7 @@ export class AfterStartedComponent implements OnInit, AfterViewInit{
 
   private createScoreGroup(team: Team, i: number): FormGroup<ScoreGroup> {
     let scoreGroup = this._fb.group<ScoreGroup>({
-      score: new FormControl<string>(Converters.convertResponse(team.scores[i], this.game.gameType, true), {
+      score: new FormControl<string>(Converters.convertResponse(team.scores[i], this.game.type, true), {
         nonNullable: true
       })
     })
@@ -127,7 +126,7 @@ export class AfterStartedComponent implements OnInit, AfterViewInit{
             if (index != -1)
               this.toChange.splice(index, 1)
 
-            scoreGroup.controls.score.setValue(Converters.convertResponse(team.scores[i], this.game.gameType,true))
+            scoreGroup.controls.score.setValue(Converters.convertResponse(team.scores[i], this.game.type,true))
 
             setTimeout(() => {
               this.changeSubscribe(scoreGroup, team, i)
@@ -156,5 +155,25 @@ export class AfterStartedComponent implements OnInit, AfterViewInit{
 
   protected cancelUpdate() {
     this.cancel.next(1)
+  }
+
+  protected changeStatus(status: keyof typeof OGameStatus, message: string) {
+    this._confirmer.createConfirm(message)
+      .subscribe(result => {
+        if (!result)
+          return
+
+        this.changeStatusEvent.emit(status)
+      })
+  }
+
+  protected deleteGame() {
+    this._confirmer.createConfirm('Удалить игру?')
+      .subscribe(result => {
+        if (!result)
+          return
+
+        this.deleteEvent.emit(1)
+      })
   }
 }

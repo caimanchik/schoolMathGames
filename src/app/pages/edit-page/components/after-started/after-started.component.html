@@ -3,7 +3,7 @@
     <h2 class="after__name">
         {{ game.name }}
         <div class="after__type">
-            / {{ OGameType[game.gameType] }}
+            / {{ OGameType[game.type] }}
         </div>
     </h2>
 
@@ -30,30 +30,46 @@
 
 
             <ng-container *ngIf="game.status == 1">
-                <button class="after__button after__button-pause" @appear @leave>
+                <button class="after__button after__button-pause"
+                        @appear @leave
+                        (click)="changeStatus(2, 'Приостановить игру?')">
                     Приостановить
                 </button>
             </ng-container>
 
             <ng-container *ngIf="game.status == 2">
-                <button class="after__button after__button-ok" @appear @leave>
+                <button class="after__button after__button-ok"
+                        @appear @leave
+                        (click)="changeStatus(1, 'Возобновить игру?')">
                     Возобновить
                 </button>
-                <button class="after__button after__button-frozen" @appear @leave>
+                <button class="after__button after__button-frozen"
+                        @appear @leave
+                        (click)="changeStatus(3, 'Заморозить игру?')">
                     Заморозить
                 </button>
             </ng-container>
 
             <ng-container *ngIf="game.status == 3">
-                <button class="after__button after__button-pause" @appear @leave>
+                <button class="after__button after__button-pause"
+                        @appear @leave
+                        (click)="changeStatus(2, 'Разморозить игру?')">
                     Разморозить
                 </button>
-                <button class="after__button after__button-stop" @appear @leave>
+                <button class="after__button after__button-stop"
+                        @appear @leave
+                        (click)="changeStatus(4, 'Завершить игру?')">
                     Завершить
                 </button>
             </ng-container>
 
             <ng-container *ngIf="game.status == 4">
+                <button class="after__button after__button-stop"
+                        (click)="deleteGame()"
+                        @appear @leave
+                >
+                    Удалить игру
+                </button>
                 <div class="after__button after__button-stop" @appear @leave>
                     Завершена
                 </div>
@@ -73,12 +89,12 @@
                 <div class="after-results__sum-head" #sumRef>
                     Сумма
                 </div>
-                <ng-container *ngFor="let ex of GameExercises.getExercises(game.gameType)">
+                <ng-container *ngFor="let ex of GameExercises.getExercises(game.type)">
                     <div class="after-results__score-head">
                         {{ ex }}
                     </div>
                 </ng-container>
-                <ng-container *ngFor="let ex of GameExercises.getExercises(game.gameType)">
+                <ng-container *ngFor="let ex of GameExercises.getExercises(game.type)">
                     <div class="after-results__score-head">
                         {{ ex }}
                     </div>

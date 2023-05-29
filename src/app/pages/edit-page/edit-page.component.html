@@ -19,6 +19,7 @@
                     [game]="game"
                     class="edit__after"
                     (changeStatusEvent)="changeGameStatus($event)"
+                    (deleteEvent)="deleteGame()"
                     *ngIf="game.status != 0"
                     @appear @leave
             ></app-after-started>

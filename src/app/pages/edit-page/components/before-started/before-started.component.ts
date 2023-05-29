@@ -42,7 +42,7 @@ export class BeforeStartedComponent implements OnInit {
 
   @Input('game') game!: GameAllInfo
   @Output('changeStatusEvent') changeStatusEvent: EventEmitter<keyof typeof OGameStatus> = new EventEmitter<keyof typeof OGameStatus>()
-  @Output('deleteEvent') deleteEvent: EventEmitter<true> = new EventEmitter<true>()
+  @Output('deleteEvent') deleteEvent: EventEmitter<any> = new EventEmitter<any>()
 
   protected gameForm!: FormGroup<GameForm>
   protected teamForm!: FormGroup
@@ -256,11 +256,7 @@ export class BeforeStartedComponent implements OnInit {
         if (!result)
           return
 
-        this.deleteEvent.emit(true)
-
-        this._gamesService.deleteGame({gameId: this.game.id})
-          .pipe(take(1))
-          .subscribe(() => this._router.navigate(['']))
+        this.deleteEvent.emit(1)
       })
   }
 

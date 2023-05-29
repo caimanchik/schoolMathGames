@@ -5,7 +5,7 @@ import {Team} from "./Team";
 export type GameMainPage = {
   id: number,
   name: string,
-  gameType: keyof typeof OGameType,
+  type: keyof typeof OGameType,
   start: string | Date,
   status: keyof typeof OGameStatus
 }
@@ -17,12 +17,12 @@ export type GameAllInfo = GameMainPage & {
 
 export type CreateGame = {
   name: string,
-  gameType: number,
+  type: number,
   start: number,
   timeGame: number
 }
 
-export type UpdateGame = Omit<CreateGame, 'gameType'> & {
+export type UpdateGame = Omit<CreateGame, 'type'> & {
   gameId: number,
 }
 

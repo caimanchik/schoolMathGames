@@ -70,6 +70,10 @@ export class EditPageComponent implements OnInit {
   }
 
   protected deleteGame() {
+    this._gamesService.deleteGame({gameId: this.game?.id ?? 0})
+      .pipe(take(1))
+      .subscribe(() => this._router.navigate(['']))
+
     this.game = null
   }
 }
