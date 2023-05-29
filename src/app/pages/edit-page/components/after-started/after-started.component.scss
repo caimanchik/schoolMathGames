@@ -85,10 +85,16 @@
   }
 
   &__results {
-    width: 100%;
+    //width: 100%;
     overflow-x: scroll;
 
     padding-bottom: 1rem;
+
+    &-wrap {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
   }
 }
 
@@ -100,7 +106,7 @@
     &-head {
       position: sticky;
       z-index: 3;
-      top: 0;
+      top: -3rem;
     }
   }
 
@@ -115,6 +121,7 @@
     top: 0;
     background-color: #e5e5e5;
     z-index: 2;
+    padding: .7rem;
   }
 
   &__sum-head {
@@ -132,7 +139,7 @@
   }
 
   &__score-head {
-    width: 2.5rem;
+    width: 3.5rem;
     height: 3rem;
 
     border: 1px solid black;
@@ -177,12 +184,12 @@
   }
 
   &__score {
-    width: 2.5rem;
+    width: 3.5rem;
     height: 3rem;
   }
 
   &__input {
-    width: 2.5rem;
+    width: 3.5rem;
     height: 3rem;
 
     border: 1px solid black;

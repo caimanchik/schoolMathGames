@@ -10,6 +10,22 @@ export class Converters {
     return ''
   }
 
+  public static convertToDb(input: string, gameType: keyof typeof OGameType, i: number = 0) {
+    if (gameType == 2)
+      return this.convertDominoDb(input)
+
+    return 0
+  }
+
+  private static convertDominoDb(input: string): number {
+    if (input == 'р1')
+      return -1
+    if (input == 'р2')
+      return -2
+
+    return parseInt(input)
+  }
+
   private static convertDominoUser(input: string, i: number): string {
     let intInput = parseInt(input)
 
@@ -37,7 +53,7 @@ export class Converters {
     if (intInput == 1)
       return '1'
     if (intInput == 0)
-      return '-'
+      return '0'
     if (intInput == -1)
       return 'р1'
 

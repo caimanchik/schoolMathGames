@@ -1,1 +1,111 @@
-<p>game-page works!</p>
+<section class="game" @appear @leave>
+
+    <app-back-to-main></app-back-to-main>
+
+    <ng-container *ngIf="game; else loading">
+        <div class="game__wrapper" @appear @leave>
+
+            <h2 class="game__name">
+                {{ game.name }}
+                <div class="game__type">
+                    / {{ OGameType[game.type] }}
+                </div>
+            </h2>
+
+            <div class="game__row">
+
+                <div class="game__rest game-rest">
+
+                    <div class="game-rest__container">
+                        {{ game.time | time }}
+                    </div>
+
+                </div>
+
+                <div class="game__buttons">
+
+                    <ng-container *ngIf="game.status == 0">
+                        <div class="game__button"
+                             @appear @leave>
+                            Не началась
+                        </div>
+                    </ng-container>
+
+                    <ng-container *ngIf="game.status == 1">
+                        <div class="game__button game__button-ok"
+                             @appear @leave>
+                            Идёт
+                        </div>
+                    </ng-container>
+
+                    <ng-container *ngIf="game.status == 2">
+                        <div class="game__button game__button-pause"
+                                @appear @leave>
+                            Приостановлена
+                        </div>
+                    </ng-container>
+
+                    <ng-container *ngIf="game.status == 3">
+                        <div class="game__button game__button-frozen"
+                                @appear @leave>
+                            Заморожена
+                        </div>
+                    </ng-container>
+
+                    <ng-container *ngIf="game.status == 4">
+                        <div class="game__button game__button-stop"
+                                @appear @leave>
+                            Завершена
+                        </div>
+                    </ng-container>
+
+                </div>
+
+            </div>
+
+            <div class="game__results-wrap">
+
+                <div class="game__results game-results">
+                    <div class="game-results__row game-results__row-head">
+                        <div class="game-results__team-head" #teamRef>
+                            Команда
+                        </div>
+                        <div class="game-results__sum-head" #sumRef>
+                            Сумма
+                        </div>
+                        <ng-container *ngFor="let ex of GameExercises.getExercises(game.type)">
+                            <div class="game-results__score-head">
+                                {{ ex }}
+                            </div>
+                        </ng-container>
+                    </div>
+
+                    <ng-container *ngFor="let team of game.teams; let i = index">
+                        <div class="game-results__row">
+                            <div class="game-results__team" #teamRef>
+                                {{ team.name }}
+                            </div>
+                            <div class="game-results__sum" #sumRef>
+                                {{ team.sumScore }}
+                            </div>
+
+                            <ng-container *ngFor="let score of team.scores; let j = index">
+                                <div class="game-results__score">
+                                    {{ Converters.convertResponse(score, this.game.type, false, j) }}
+                                </div>
+                            </ng-container>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+
+        </div>
+    </ng-container>
+
+    <ng-template #loading>
+        <div class="loader" @appear @leave>
+            <img src="assets/icons/loader-black.svg" alt="">
+        </div>
+    </ng-template>
+
+</section>

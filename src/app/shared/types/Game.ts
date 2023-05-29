@@ -12,7 +12,7 @@ export type GameMainPage = {
 
 export type GameAllInfo = GameMainPage & {
   teams: Team[],
-  timeGame: number
+  time: number
 }
 
 export type CreateGame = {

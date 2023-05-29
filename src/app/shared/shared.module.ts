@@ -5,6 +5,7 @@ import {ErrorComponent} from "./components/error/error.component";
 import {StatusDirective} from "./directives/status.directive";
 import {RouterLink} from "@angular/router";
 import { ConfirmComponent } from './components/confirm/confirm.component';
+import { TimePipe } from './pipes/time.pipe';
 
 
 
@@ -14,6 +15,7 @@ import { ConfirmComponent } from './components/confirm/confirm.component';
     ErrorComponent,
     StatusDirective,
     ConfirmComponent,
+    TimePipe,
   ],
   imports: [
     CommonModule,
@@ -24,6 +26,7 @@ import { ConfirmComponent } from './components/confirm/confirm.component';
     ErrorComponent,
     StatusDirective,
     ConfirmComponent,
+    TimePipe,
   ]
 })
 export class SharedModule { }

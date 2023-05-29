@@ -4,6 +4,7 @@ import {map, Observable} from "rxjs";
 import {HttpHeaders, HttpParams} from "@angular/common/http";
 import {CreateGame, DeleteGame, GameAllInfo, GameMainPage, UpdateGame, UpdateGameStatus} from "../types/Game";
 import {CreateTeam, DeleteTeam, Team, UpdateTeam} from "../types/Team";
+import {ChangeScoreGame} from "../types/forms/СhangeScore";
 
 @Injectable({
   providedIn: 'root'
@@ -77,5 +78,11 @@ export class GamesService {
     let headers = new HttpHeaders().append('Authorization', `Token ${localStorage.getItem('token') ?? ''}`)
 
     return this._http.Post<UpdateGameStatus, GameAllInfo>('api/v1/updateGameStatus', game, new HttpParams(), headers)
+  }
+
+  public changeScores(scores: ChangeScoreGame): Observable<any> {
+    let headers = new HttpHeaders().append('Authorization', `Token ${localStorage.getItem('token') ?? ''}`)
+
+    return this._http.Post<ChangeScoreGame, any>('api/v1/changeScores', scores, new HttpParams(), headers)
   }
 }

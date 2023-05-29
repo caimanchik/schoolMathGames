@@ -215,7 +215,7 @@ export class BeforeStartedComponent implements OnInit {
       time: new FormControl<string>(this.parseTime(date), {
         nonNullable: true
       }),
-      timeGame: new FormControl<string>(this.parseTimeGame(gameResp.timeGame), {
+      timeGame: new FormControl<string>(this.parseTimeGame(gameResp.time), {
         nonNullable: true
       })
     })
@@ -280,7 +280,7 @@ export class BeforeStartedComponent implements OnInit {
     this._gamesService.updateGame(game)
       .subscribe(() => {
         this.game.name = game.name
-        this.game.timeGame = game.timeGame
+        this.game.time = game.timeGame
         this.game.start = new Date(game.start)
         this.gameForm.enable()
         setTimeout(() => this.disableGameForm = true, 10)
@@ -303,7 +303,7 @@ export class BeforeStartedComponent implements OnInit {
     this.gameForm.controls.gameTitle.setValue(this.game.name)
     this.gameForm.controls.date.setValue(this.parseDate(date))
     this.gameForm.controls.time.setValue(this.parseTime(date))
-    this.gameForm.controls.timeGame.setValue(this.parseTimeGame(this.game.timeGame))
+    this.gameForm.controls.timeGame.setValue(this.parseTimeGame(this.game.time))
 
     this.gameForm.enable()
 

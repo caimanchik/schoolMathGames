@@ -3,7 +3,7 @@ import {OGameType} from "../GameType";
 export type ChangeScoreTeam = {
   teamId: number,
   exercise: number,
-  value: string
+  value: string | number
 }
 
 export type ChangeScoreGame = {

@@ -20,9 +20,10 @@ import {Converters} from "../../../../shared/functions/Converters";
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {ScoreGroup, TeamGroup, TeamsScoresGroup} from "../../../../shared/types/forms/ScoresGroup";
 import {Team} from "../../../../shared/types/Team";
-import {ChangeScoreTeam} from "../../../../shared/types/forms/СhangeScore";
-import {Subject} from "rxjs";
+import {ChangeScoreGame, ChangeScoreTeam} from "../../../../shared/types/forms/СhangeScore";
+import {Subject, take} from "rxjs";
 import {ConfirmService} from "../../../../shared/services/confirm.service";
+import {GamesService} from "../../../../shared/services/games.service";
 
 @Component({
   selector: 'app-after-started',
@@ -58,7 +59,8 @@ export class AfterStartedComponent implements OnInit, AfterViewInit{
   constructor(
     private _fb: FormBuilder,
     private _destroy: DestroyService,
-    private _confirmer: ConfirmService
+    private _confirmer: ConfirmService,
+    private _gamesService: GamesService
   ) { }
 
   ngOnInit(): void {
@@ -151,6 +153,23 @@ export class AfterStartedComponent implements OnInit, AfterViewInit{
       this.toChange.splice(index, 1)
 
     this.toChange.push(change)
+  }
+
+  protected updateScores() {
+    let gameScores: ChangeScoreGame = {
+      gameId: this.game.id,
+      gameType: this.game.type,
+      changeScores: this.toChange.map(e => ({
+        teamId: e.teamId,
+        exercise: e.exercise,
+        value: Converters.convertToDb(e.value.toString(), this.game.type)
+      }))
+    }
+    this._gamesService.changeScores(gameScores)
+      .pipe(take(1))
+      .subscribe()
+
+    this.toChange = []
   }
 
   protected cancelUpdate() {

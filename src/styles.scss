@@ -52,3 +52,11 @@ html {
   font-weight: 700;
   color: #6B6B6B;
 }
+
+.loader {
+  position: fixed;
+  left: 50%;
+  top: 25%;
+
+  transform: translateX(-50%);
+}
