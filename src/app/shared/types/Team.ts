@@ -2,7 +2,7 @@ export type Team = {
   teamId: number,
   name: string,
   sumScore: number,
-  scores: string[]
+  scores: number[]
 }
 
 export type CreateTeam = {

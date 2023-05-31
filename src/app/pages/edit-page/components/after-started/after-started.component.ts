@@ -24,6 +24,7 @@ import {ChangeScoreGame, ChangeScoreTeam} from "../../../../shared/types/forms/Ð
 import {Subject, take} from "rxjs";
 import {ConfirmService} from "../../../../shared/services/confirm.service";
 import {GamesService} from "../../../../shared/services/games.service";
+import {designations, TDesignations} from "../../../../shared/types/Designations";
 
 @Component({
   selector: 'app-after-started',
@@ -46,8 +47,11 @@ export class AfterStartedComponent implements OnInit, AfterViewInit{
   @Input('game') public game!: GameAllInfo
   @Output('changeStatusEvent') public changeStatusEvent: EventEmitter<keyof typeof OGameStatus> = new EventEmitter<keyof typeof OGameStatus>()
   @Output('deleteEvent') deleteEvent: EventEmitter<any> = new EventEmitter<any>()
+
   protected teamsScoresForm!: FormGroup<TeamsScoresGroup>
   protected toChange: ChangeScoreTeam[] = []
+  protected desis: any[] = []
+
   private cancel: Subject<any> = new Subject<any>()
 
   @ViewChildren('teamRef') private teamRef!: ElementRef[]
@@ -65,6 +69,11 @@ export class AfterStartedComponent implements OnInit, AfterViewInit{
 
   ngOnInit(): void {
     this.createScoresForm()
+
+    for (let k of Object.keys(designations[this.game.type]))
+      // @ts-ignore
+      this.desis.push([k, designations[this.game.type][k]])
+
   }
 
   ngAfterViewInit() {

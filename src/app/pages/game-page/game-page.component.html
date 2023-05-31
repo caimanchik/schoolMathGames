@@ -90,7 +90,8 @@
                             </div>
 
                             <ng-container *ngFor="let score of team.scores; let j = index">
-                                <div class="game-results__score">
+                                <div class="game-results__score"
+                                     [appChangeColor]=" Converters.convertResponse(score, this.game.type, false, j)">
                                     {{ Converters.convertResponse(score, this.game.type, false, j) }}
                                 </div>
                             </ng-container>

@@ -174,6 +174,7 @@
     padding: .7rem;
     position: sticky;
     left: 0;
+    white-space: nowrap;
 
     background-color: #e5e5e5;
   }
@@ -203,5 +204,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    color: white;
   }
 }

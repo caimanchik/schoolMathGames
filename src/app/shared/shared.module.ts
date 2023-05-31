@@ -6,6 +6,7 @@ import {StatusDirective} from "./directives/status.directive";
 import {RouterLink} from "@angular/router";
 import { ConfirmComponent } from './components/confirm/confirm.component';
 import { TimePipe } from './pipes/time.pipe';
+import { ChangeColorDirective } from './directives/change-color.directive';
 
 
 
@@ -16,6 +17,7 @@ import { TimePipe } from './pipes/time.pipe';
     StatusDirective,
     ConfirmComponent,
     TimePipe,
+    ChangeColorDirective,
   ],
   imports: [
     CommonModule,
@@ -27,6 +29,7 @@ import { TimePipe } from './pipes/time.pipe';
     StatusDirective,
     ConfirmComponent,
     TimePipe,
+    ChangeColorDirective,
   ]
 })
 export class SharedModule { }

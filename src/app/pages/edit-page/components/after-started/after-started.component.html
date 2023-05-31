@@ -114,7 +114,28 @@
                     </div>
                 </ng-container>
             </ng-container>
+
+            <div class="after-results__designations after-designations">
+                <div class="after-designations__header">
+                    Обозначения
+                </div>
+
+                <div class="after-designations__table">
+                    <ng-container *ngFor="let des of desis">
+                        <div class="after-designations__row">
+                            <div class="after-designations__key">
+                                {{ des[0] }}
+                            </div>
+                            <div class="after-designations__value">
+                                {{ des[1] }}
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+
         </div>
+
     </div>
 
 </div>
