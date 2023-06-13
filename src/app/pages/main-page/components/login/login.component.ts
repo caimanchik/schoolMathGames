@@ -46,8 +46,11 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    if (!this.loginForm.valid)
+    if (!this.loginForm.valid) {
+      this.loginForm.controls.login.markAsTouched()
+      this.loginForm.controls.password.markAsTouched()
       return
+    }
 
     this.button.nativeElement.classList.add('loading')
 

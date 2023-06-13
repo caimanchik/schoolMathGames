@@ -11,6 +11,8 @@
                 {{ OGameType[game.type] }}
             </div>
 
+            <div class="game__grow"></div>
+
             <div class="game__start game__flex">
                 <span>Начало: </span>
                 <span>{{ game.start | date:'dd.MM.yyyy HH:mm' }}</span>
@@ -20,6 +22,8 @@
                 <span>Статус: </span>
                 <span [statusColor]="game.status">{{ OGameStatus[game.status] }}</span>
             </div>
+
+            <div class="game__grow"></div>
 
             <ul class="game__links game-links">
                 <li class="game-links_item">

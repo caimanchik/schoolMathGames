@@ -41,6 +41,30 @@ h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
 html {
   font-family: 'Quicksand', sans-serif;
   letter-spacing: .035rem;
+
+  @media (max-width: 1400px) {
+    font-size: 13.5px;
+  }
+
+  @media (max-width: 1100px) {
+    font-size: 13px;
+  }
+
+  @media (max-width: 998px) {
+    font-size: 12.5px;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
+
+  @media (max-width: 500px) {
+    font-size: 11px;
+  }
+
+  @media (max-width: 430px) {
+    font-size: 10px;
+  }
 }
 
 .inter {
@@ -51,6 +75,10 @@ html {
   font-size: 4rem;
   font-weight: 700;
   color: #6B6B6B;
+
+  @media (max-width: 930px) {
+    font-size: 3.5rem;
+  }
 }
 
 .loader {

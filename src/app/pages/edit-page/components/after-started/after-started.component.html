@@ -2,9 +2,9 @@
 
     <h2 class="after__name">
         {{ game.name }}
-        <div class="after__type">
+        <span class="after__type">
             / {{ OGameType[game.type] }}
-        </div>
+        </span>
     </h2>
 
     <div class="after__row">
@@ -12,7 +12,9 @@
         <div class="after__rest after-rest">
 
             <div class="after-rest__container">
-                01:30:30
+                <div class="after-rest__text">
+                    01:30:30
+                </div>
             </div>
 
         </div>

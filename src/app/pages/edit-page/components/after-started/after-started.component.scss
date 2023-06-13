@@ -1,7 +1,15 @@
 .after {
   &__wrapper {
-    padding: 2rem 4.5rem;
+    padding: 2.4rem 4.5rem 30rem;
     width: 100%;
+
+    @media (max-width: 768px) {
+      padding: 2.4rem 2rem 30rem;
+    }
+
+    @media (max-width: 500px) {
+      padding: 2.4rem 1.5rem 30rem;
+    }
   }
 
   &__name {
@@ -11,6 +19,10 @@
     align-items: center;
     justify-content: center;
     gap: .7rem;
+    flex-wrap: wrap;
+    padding-left: 3rem;
+    word-wrap: anywhere;
+    text-align: center;
   }
 
   &__type {
@@ -22,16 +34,36 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
   }
 
   &__rest {
     margin-left: 15%;
+
+    @media (max-width: 1400px) {
+      margin-left: 0;
+    }
+
+    @media (max-width: 970px) {
+      flex: 0 0 100%;
+    }
   }
 
   &__buttons {
     display: flex;
     gap: 1.2rem;
+    flex-wrap: wrap;
     justify-content: flex-end;
+
+    @media (max-width: 1400px) {
+      gap: .8rem;
+    }
+
+    @media (max-width: 970px) {
+      justify-content: center;
+      flex: 0 0 100%;
+    }
   }
 
   &__button {
@@ -66,11 +98,15 @@
 }
 
 .after-rest {
-  padding: .5rem .9rem;
-  background-color: #F0F0F0;
-  border-radius: 11px;
+
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
 
   &__container {
+    border-radius: 11px;
+    background-color: #F0F0F0;
+    padding: .5rem .9rem;
     color: #3290FF;
     font-weight: 700;
     font-size: 2.5rem;

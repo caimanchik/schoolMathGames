@@ -4,7 +4,15 @@
   background-color: #fff;
   display: flex;
   flex-direction: column;
-  padding: 2rem 4.5rem;
+  padding: 2.4rem 4.5rem;
+
+  @media (max-width: 768px) {
+    padding: 2.4rem 2rem;
+  }
+
+  @media (max-width: 500px) {
+    padding: 2.4rem 1.5rem;
+  }
 
   &__wrapper {
     flex-grow: 1;
@@ -19,10 +27,18 @@
     font-weight: 700;
     font-size: 1.6rem;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     gap: .7rem;
     width: 100%;
+    padding-left: 3rem;
+    word-wrap: anywhere;
+    text-align: center;
+
+    @media (max-width: 500px) {
+      padding-left: 3.5rem;
+    }
   }
 
   &__type {
@@ -35,10 +51,15 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
+    gap: 1.5rem;
   }
 
   &__rest {
     margin-left: 15%;
+
+    @media (max-width: 500px) {
+      margin-left: 0;
+    }
   }
 
   &__buttons {
@@ -48,7 +69,7 @@
   }
 
   &__button {
-    background-color: #000;
+    background-color: rgb(107, 107, 107);
     color: white;
     padding: 1.2rem 1.8rem;
     border-radius: 11px;

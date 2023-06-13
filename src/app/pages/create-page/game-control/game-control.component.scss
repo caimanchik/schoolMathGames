@@ -3,10 +3,30 @@
     display: flex;
     flex-wrap: wrap;
     margin: -.7rem;
+    justify-content: center;
+    @media (max-width: 679px) {
+      width: 450px;
+    }
+    @media (max-width: 679px) {
+      width: 400px;
+    }
   }
 
   &__game {
     padding: .7rem;
+
+    @media (max-width: 679px) {
+      &:first-child {
+        order: 2;
+      }
+      &:nth-child(2) {
+        order: 1;
+        break-after: right;
+      }
+      &:last-child {
+        order: 3;
+      }
+    }
   }
 
   &__button {

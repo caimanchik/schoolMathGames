@@ -15,7 +15,7 @@
 
     <div class="edit-form__row">
         <div class="edit-form__field">
-            <div class="edit-form__field-title">
+            <div class="edit-form__field-title edit-form__field-title-date">
                 Дата
             </div>
             <div class="edit-form__date-row">
@@ -106,7 +106,10 @@
                                     (click)="cancelUpdate(i)"
                                     @appear @leave
                             >
-                                Отмена
+                                <span class="edit-teams__cancel-text">
+                                    Отмена
+                                </span>
+                                <img src="assets/icons/cancel.png">
                             </button>
                         </ng-container>
                     </ng-container>
@@ -116,7 +119,7 @@
                             <button
                                     class="edit-teams__button edit-teams__ok edit-teams__ok-add"
                                     (click)="addTeam($event)"
-                                    @appear
+                                    @appear @leave
                             >
                                 <img src="assets/icons/ok.png">
                                 <img src="assets/icons/loader-button.svg">

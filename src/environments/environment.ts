@@ -6,7 +6,7 @@ import {Environment} from "../app/shared/types/Environment";
 
 export const environment: Environment = {
   production: false,
-  url: 'https://kririll.pythonanywhere.com/',
+  url: 'http://127.0.0.1:8000/',
 };
 
 /*
