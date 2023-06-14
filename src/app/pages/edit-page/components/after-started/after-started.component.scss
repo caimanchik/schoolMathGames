@@ -138,7 +138,7 @@
     &-head {
       position: sticky;
       z-index: 3;
-      top: -3rem;
+      top: 0;
     }
   }
 
@@ -183,10 +183,15 @@
     background-color: #e5e5e5;
     position: sticky;
     top: 0;
+
+    transition: all ease .3s;
+
+    &.active {
+      background-color: #b7dffc;
+    }
   }
 
   &__team {
-    //width: 10rem;
     border: 1px solid black;
     border-top: none;
     display: flex;
@@ -198,6 +203,11 @@
     white-space: nowrap;
 
     background-color: #e5e5e5;
+    transition: all ease .3s;
+
+    &.active {
+      background-color: #b7dffc;
+    }
   }
 
   &__sum {
@@ -234,7 +244,9 @@
 
 .after-designations {
   position: absolute;
-  margin-top: 4rem;
+  bottom: 0;
+  transform: translateY(calc(100% + 2rem));
+  //margin-top: 4rem;
   white-space: nowrap;
 
   &__header {

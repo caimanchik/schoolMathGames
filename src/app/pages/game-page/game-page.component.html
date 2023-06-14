@@ -26,35 +26,35 @@
 
                     <ng-container *ngIf="game.status == 0">
                         <div class="game__button"
-                             @appear @leave>
+                             @appear>
                             Не началась
                         </div>
                     </ng-container>
 
                     <ng-container *ngIf="game.status == 1">
                         <div class="game__button game__button-ok"
-                             @appear @leave>
+                             @appear>
                             Идёт
                         </div>
                     </ng-container>
 
                     <ng-container *ngIf="game.status == 2">
                         <div class="game__button game__button-pause"
-                                @appear @leave>
+                                @appear>
                             Приостановлена
                         </div>
                     </ng-container>
 
                     <ng-container *ngIf="game.status == 3">
                         <div class="game__button game__button-frozen"
-                                @appear @leave>
+                                @appear>
                             Заморожена
                         </div>
                     </ng-container>
 
                     <ng-container *ngIf="game.status == 4">
                         <div class="game__button game__button-stop"
-                                @appear @leave>
+                                @appear>
                             Завершена
                         </div>
                     </ng-container>
@@ -64,8 +64,7 @@
             </div>
 
             <div class="game__results-wrap">
-
-                <div class="game__results game-results">
+                <div class="game__results game-results" #results>
                     <div class="game-results__row game-results__row-head">
                         <div class="game-results__team-head" #teamRef>
                             Команда

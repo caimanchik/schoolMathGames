@@ -13,7 +13,7 @@
 
             <div class="after-rest__container">
                 <div class="after-rest__text">
-                    01:30:30
+                    {{ game.time | time }}
                 </div>
             </div>
 
@@ -83,7 +83,7 @@
 
     <div class="after__results-wrap">
 
-        <div class="after__results after-results">
+        <div class="after__results after-results" #results>
             <div class="after-results__row after-results__row-head">
                 <div class="after-results__team-head" #teamRef>
                     Команда
@@ -92,7 +92,7 @@
                     Сумма
                 </div>
                 <ng-container *ngFor="let ex of GameExercises.getExercises(game.type)">
-                    <div class="after-results__score-head">
+                    <div class="after-results__score-head" #sumHeader>
                         {{ ex }}
                     </div>
                 </ng-container>
@@ -110,7 +110,13 @@
 
                         <ng-container *ngFor="let score of team.controls.scores.controls; let j = index">
                             <div class="after-results__score">
-                                <input class="after-results__input" type="text" [formControl]="score.controls.score">
+                                <input
+                                        class="after-results__input"
+                                        type="text" [formControl]="score.controls.score"
+                                        (click)="checkStatus($event, score.controls.score)"
+                                        (focus)="focus(i, j)"
+                                        (blur)="blur(i, j)"
+                                >
                             </div>
                         </ng-container>
                     </div>

@@ -12,6 +12,7 @@ export class ErrorComponent implements OnInit {
 
   protected error: string = ''
   protected visible: boolean = false
+  private timeOut!: NodeJS.Timeout
 
   constructor(
     private _error: ErrorService,
@@ -25,8 +26,10 @@ export class ErrorComponent implements OnInit {
       .subscribe(error => {
         this.error = error
         this.visible = true
-        setTimeout(() => {
+        clearTimeout(this.timeOut)
+        this.timeOut = setTimeout(() => {
           this.visible = false
+          clearTimeout(this.timeOut)
         }, 3000)
       })
   }

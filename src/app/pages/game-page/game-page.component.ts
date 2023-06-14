@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChildren} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewChildren} from '@angular/core';
 import {GamesService} from "../../shared/services/games.service";
 import {Router} from "@angular/router";
 import {DestroyService} from "../../shared/services/destroy.service";
@@ -33,6 +33,7 @@ export class GamePageComponent implements OnInit{
   protected time: string = ''
   @ViewChildren('teamRef') private teamRef!: ElementRef[]
   @ViewChildren('sumRef') private sumRef!: ElementRef[]
+  @ViewChild('results') private results!: ElementRef
 
   protected readonly OGameType = OGameType;
   protected readonly GameExercises = GameExercises;
@@ -68,15 +69,20 @@ export class GamePageComponent implements OnInit{
         this.checkResponse(gameResp)
         this.checkTeamsView()
       })
+
+    window.addEventListener('orientationchange', () => {
+      this.isTeamsChecked = false
+      this.checkTeamsView()
+    })
   }
 
   private remakeInterval() {
-    clearInterval(this.interval)
-
     if (this.game.status == 1)
       this.interval = setInterval(() => {
         this.game.time -= 1
         }, 1000)
+    else
+      clearInterval(this.interval)
   }
 
   private checkResponse(game: GameAllInfo) {
@@ -86,9 +92,8 @@ export class GamePageComponent implements OnInit{
     if (this.game.status != game.status) {
       this.game.status = game.status
       this.game.time = game.time
+      this.remakeInterval()
     }
-
-    this.remakeInterval()
     // if (game.status != 1)
     //   this.game.time = game.time
 
@@ -112,6 +117,11 @@ export class GamePageComponent implements OnInit{
       this.teamRef.forEach(e => maxWidth = Math.max(maxWidth, e.nativeElement.getBoundingClientRect().width))
       this.teamRef.forEach(e => e.nativeElement.style.width = maxWidth + 'px')
       this.sumRef.forEach(e => e.nativeElement.style.left = maxWidth + 'px')
+      const height = window.innerHeight|| document.documentElement.clientHeight||
+        document.body.clientHeight;
+      const top = this.results.nativeElement.getBoundingClientRect().top;
+
+      this.results.nativeElement.style.maxHeight = (height - top) + 'px';
     }, 100)
   }
 }

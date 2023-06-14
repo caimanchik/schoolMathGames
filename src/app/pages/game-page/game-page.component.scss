@@ -4,14 +4,14 @@
   background-color: #fff;
   display: flex;
   flex-direction: column;
-  padding: 2.4rem 4.5rem;
+  padding: 2.4rem 4.5rem 0;
 
   @media (max-width: 768px) {
-    padding: 2.4rem 2rem;
+    padding: 2.4rem 2rem 0;
   }
 
   @media (max-width: 500px) {
-    padding: 2.4rem 1.5rem;
+    padding: 2.4rem 1.5rem 0;
   }
 
   &__wrapper {
@@ -109,6 +109,12 @@
     overflow-x: scroll;
 
     padding-bottom: 1rem;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
 
     &-wrap {
       width: 100%;
@@ -131,6 +137,9 @@
 }
 
 .game-results {
+  //position: relative;
+  //height: 500px;
+
   &__row {
     display: flex;
     width: fit-content;
@@ -138,7 +147,7 @@
     &-head {
       position: sticky;
       z-index: 3;
-      top: -3rem;
+      top: 0;
     }
   }
 
@@ -157,7 +166,7 @@
   }
 
   &__sum-head {
-    width: 5rem;
+    width: 5.4rem;
     height: 3rem;
     border: 1px solid black;
     border-left: none;
@@ -201,7 +210,7 @@
   }
 
   &__sum {
-    width: 5rem;
+    width: 5.4rem;
     height: 3rem;
     text-align: center;
 
