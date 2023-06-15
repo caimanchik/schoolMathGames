@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   Component,
   ElementRef,
   EventEmitter,
@@ -24,7 +23,7 @@ import {ChangeScoreGame, ChangeScoreTeam} from "../../../../shared/types/forms/Ð
 import {Subject, take} from "rxjs";
 import {ConfirmService} from "../../../../shared/services/confirm.service";
 import {GamesService} from "../../../../shared/services/games.service";
-import {designations, TDesignations} from "../../../../shared/types/Designations";
+import {designations} from "../../../../shared/types/Designations";
 import {ErrorService} from "../../../../shared/services/error.service";
 
 @Component({
@@ -113,13 +112,6 @@ export class AfterStartedComponent implements OnInit{
       this.resultsRef.nativeElement.style.maxHeight = (height - top) + 'px';
     }, 100)
   }
-
-  // ngAfterViewInit() {
-  //   let max = 0
-  //   this.teamRef.forEach(e => max = Math.max(max, e.nativeElement.getBoundingClientRect().width))
-  //   this.teamRef.forEach(e => e.nativeElement.style.width = max + 'px')
-  //   this.sumRef.forEach(e => e.nativeElement.style.left = max + 'px')
-  // }
 
   protected getTeamsGroups() {
     return this.teamsScoresForm.controls.teams.controls

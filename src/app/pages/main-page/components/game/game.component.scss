@@ -24,9 +24,9 @@
     line-height: 1.23em;
     padding: 0 2.5rem;
 
-    word-wrap: break-word;
+    word-wrap: anywhere;
     max-width: 100%;
-    word-break: break-all;
+    //word-break: break-all;
   }
 
   &__type {
